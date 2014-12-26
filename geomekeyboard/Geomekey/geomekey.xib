@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KeyboardViewController" customModule="Geomekey" customModuleProvider="target">
             <connections>
+                <outlet property="pointer1" destination="aEW-12-h4U" id="UNS-Nn-i9z"/>
+                <outlet property="pointer2" destination="To4-sz-ArU" id="EqU-2t-92o"/>
                 <outlet property="someButton" destination="tSL-cx-X0f" id="oZi-8A-ZCZ"/>
                 <outlet property="wrapper" destination="iN0-l3-epB" id="Q0i-Qu-T9U"/>
             </connections>
@@ -16,15 +18,23 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSL-cx-X0f">
-                    <rect key="frame" x="30" y="30" width="30" height="30"/>
+                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                     <color key="backgroundColor" red="1" green="0.22127328403859958" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Button">
+                    <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="someBUtton:" destination="-1" eventType="touchUpInside" id="RfP-DT-rDu"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aEW-12-h4U" userLabel="pointer1">
+                    <rect key="frame" x="80" y="40" width="160" height="80"/>
+                    <color key="backgroundColor" red="1" green="0.4194645025" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="To4-sz-ArU" userLabel="pointer2">
+                    <rect key="frame" x="80" y="40" width="160" height="80"/>
+                    <color key="backgroundColor" red="1" green="0.4194645025" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>

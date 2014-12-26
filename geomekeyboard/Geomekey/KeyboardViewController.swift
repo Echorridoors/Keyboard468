@@ -8,38 +8,67 @@
 
 import UIKit
 
+var touchStart:CGPoint?
+let tileSize:CGFloat = 40
+
 class KeyboardViewController: UIInputViewController {
 
 	@IBOutlet var wrapper: UIView!
     @IBOutlet var nextKeyboardButton: UIButton!
 	var geomekeyView: UIView!
 	
+	@IBOutlet var pointer1: UIView!
+	@IBOutlet var pointer2: UIView!
+	
 	@IBOutlet var someButton: UIButton!
 	
     override func updateViewConstraints() {
         super.updateViewConstraints()
-    
+		println("yup")
         // Add custom view sizing constraints here
     }
 	
-	@IBAction func someBUtton(sender: AnyObject) {
-		
+	@IBAction func someBUtton(sender: AnyObject)
+	{
 		var proxy = textDocumentProxy as UITextDocumentProxy
-		
 		proxy.insertText("watwat")
-		
 	}
 	
-	override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-		
+	override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
+	{
 		let touchesFix = touches.anyObject() as UITouch
 		var newPoint = touchesFix.locationInView(self.wrapper)
-		println(newPoint.x)
-		
+		touchStart = newPoint
+		pointer1.frame = CGRectMake(newPoint.x, newPoint.y, 10, 10)
 	}
 	
-	override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+	override func touchesMoved(touches: NSSet, withEvent event: UIEvent)
+	{
+		let touchesFix = touches.anyObject() as UITouch
+		var newPoint = touchesFix.locationInView(self.wrapper)
 		
+		var startPressX = touchStart?.x
+		var startPressY = touchStart?.y
+		
+		if( startPressX! - newPoint.x > tileSize ){
+			println("CADRAN LEFT: \(startPressX)")
+			touchStart = newPoint
+		}
+		if( startPressX! - newPoint.x < tileSize * -1 ){
+			println("CADRAN RIGHT: \(startPressX)")
+			touchStart = newPoint
+		}
+		if( startPressY! - newPoint.y > tileSize ){
+			println("CADRAN TOP: \(startPressX)")
+			touchStart = newPoint
+		}
+		if( startPressY! - newPoint.y < tileSize * -1 ){
+			println("CADRAN DOWN: \(startPressX)")
+			touchStart = newPoint
+		}
+		
+		pointer1.frame = CGRectMake(startPressX!, startPressY!, 10, 10)
+		pointer2.frame = CGRectMake(newPoint.x, newPoint.y, 10, 10)
 	}
 	
 	override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
@@ -50,7 +79,6 @@ class KeyboardViewController: UIInputViewController {
         super.viewDidLoad()
 		
 		loadInterface()
-		
     
         // Perform custom UI setup here
         self.nextKeyboardButton = UIButton.buttonWithType(.System) as UIButton
@@ -79,6 +107,9 @@ class KeyboardViewController: UIInputViewController {
 		
 		// copy the background color
 		view.backgroundColor = geomekeyView.backgroundColor
+		
+		pointer1.frame = CGRectMake(0, 0, 10, 10)
+		pointer2.frame = CGRectMake(0, 0, 10, 10)
 	}
 	
 
