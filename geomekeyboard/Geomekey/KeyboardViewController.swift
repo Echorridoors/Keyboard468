@@ -10,6 +10,10 @@ import UIKit
 
 var touchStart:CGPoint?
 let tileSize:CGFloat = 40
+var currentPosition:String?
+var previousPosition:String?
+var letterInsert:String?
+var letterRelease:String?
 
 class KeyboardViewController: UIInputViewController {
 
@@ -40,39 +44,87 @@ class KeyboardViewController: UIInputViewController {
 		var newPoint = touchesFix.locationInView(self.wrapper)
 		touchStart = newPoint
 		pointer1.frame = CGRectMake(newPoint.x, newPoint.y, 10, 10)
+		
+		letterRelease = ""
+		letterInsert = ""
+		
+		previousPosition = ""
+		currentPosition = ""
 	}
 	
 	override func touchesMoved(touches: NSSet, withEvent event: UIEvent)
 	{
+		var render = 0
+		
 		let touchesFix = touches.anyObject() as UITouch
 		var newPoint = touchesFix.locationInView(self.wrapper)
 		
 		var startPressX = touchStart?.x
 		var startPressY = touchStart?.y
 		
+		letterInsert = ""
+		
 		if( startPressX! - newPoint.x > tileSize ){
 			println("CADRAN LEFT: \(startPressX)")
 			touchStart = newPoint
+			currentPosition = "left"
+			render = 1
 		}
 		if( startPressX! - newPoint.x < tileSize * -1 ){
 			println("CADRAN RIGHT: \(startPressX)")
 			touchStart = newPoint
+			currentPosition = "right"
+			render = 1
 		}
 		if( startPressY! - newPoint.y > tileSize ){
 			println("CADRAN TOP: \(startPressX)")
 			touchStart = newPoint
+			currentPosition = "top"
+			render = 1
 		}
 		if( startPressY! - newPoint.y < tileSize * -1 ){
 			println("CADRAN DOWN: \(startPressX)")
 			touchStart = newPoint
+			currentPosition = "down"
+			render = 1
 		}
+		
+		if( previousPosition == "top" && currentPosition == "down"){
+			currentPosition = "topdown"
+			render = 1
+		}
+		
+		
+		
+		if( render == 1 ){
+			if( previousPosition == "" && currentPosition == "top" )    { letterRelease = "t" }
+			if( previousPosition == "top" && currentPosition == "right"){ letterInsert = "h" }
+			if( previousPosition == "top" && currentPosition == "left") { letterInsert = "s" }
+			if( previousPosition == "top" && currentPosition == "top")  { letterInsert = "'" }
+			if( previousPosition == "top" && currentPosition == "down" ){ letterRelease = "m" }
+			
+			if( letterInsert != "" )
+			{
+				println("INSERT: \(letterInsert) - \(currentPosition)")
+			}
+			
+			previousPosition = currentPosition
+		}
+		
+		
+		
+		
+		
 		
 		pointer1.frame = CGRectMake(startPressX!, startPressY!, 10, 10)
 		pointer2.frame = CGRectMake(newPoint.x, newPoint.y, 10, 10)
 	}
 	
-	override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-		
+	override func touchesEnded(touches: NSSet, withEvent event: UIEvent)
+	{
+		if( letterRelease != "" ){
+			println("INSERT: \(letterRelease) - \(currentPosition)")
+		}
 	}
 
     override func viewDidLoad() {
