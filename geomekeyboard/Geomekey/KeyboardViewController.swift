@@ -10,6 +10,7 @@ import UIKit
 
 class KeyboardViewController: UIInputViewController {
 
+	@IBOutlet var wrapper: UIView!
     @IBOutlet var nextKeyboardButton: UIButton!
 	var geomekeyView: UIView!
 	
@@ -26,6 +27,22 @@ class KeyboardViewController: UIInputViewController {
 		var proxy = textDocumentProxy as UITextDocumentProxy
 		
 		proxy.insertText("watwat")
+		
+	}
+	
+	override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+		
+		let touchesFix = touches.anyObject() as UITouch
+		var newPoint = touchesFix.locationInView(self.wrapper)
+		println(newPoint.x)
+		
+	}
+	
+	override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+		
+	}
+	
+	override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
 		
 	}
 
