@@ -11,13 +11,23 @@ import UIKit
 class KeyboardViewController: UIInputViewController {
 
     @IBOutlet var nextKeyboardButton: UIButton!
-	var calculatorView: UIView!
+	var geomekeyView: UIView!
+	
+	@IBOutlet var someButton: UIButton!
 	
     override func updateViewConstraints() {
         super.updateViewConstraints()
     
         // Add custom view sizing constraints here
     }
+	
+	@IBAction func someBUtton(sender: AnyObject) {
+		
+		var proxy = textDocumentProxy as UITextDocumentProxy
+		
+		proxy.insertText("watwat")
+		
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +55,13 @@ class KeyboardViewController: UIInputViewController {
 		// load the nib file
 		var calculatorNib = UINib(nibName: "geomekey", bundle: nil)
 		// instantiate the view
-		calculatorView = calculatorNib.instantiateWithOwner(self, options: nil)[0] as UIView
+		geomekeyView = calculatorNib.instantiateWithOwner(self, options: nil)[0] as UIView
 		
 		// add the interface to the main view
-		view.addSubview(calculatorView)
+		view.addSubview(geomekeyView)
 		
 		// copy the background color
-		view.backgroundColor = calculatorView.backgroundColor
+		view.backgroundColor = geomekeyView.backgroundColor
 	}
 	
 
