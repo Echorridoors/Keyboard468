@@ -17,6 +17,7 @@ class KeyboardViewController: UIInputViewController
 	var geomekeyView: UIView!
 	var keyTimer:NSTimer?
 	var isKeyHeld = 0
+	var isAltKeyboard = 0
 	
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -64,7 +65,6 @@ class KeyboardViewController: UIInputViewController
 		var proxy = textDocumentProxy as UITextDocumentProxy
 		proxy.returnKeyType
 	}
-	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,8 +120,6 @@ class KeyboardViewController: UIInputViewController
 	
 	func templateAlt()
 	{
-		templateErase()
-		
 		var targetLayout:Array = dataSet(currentLetter)
 		
 		createButton("apostrophe", order: 0)
@@ -228,23 +226,24 @@ class KeyboardViewController: UIInputViewController
 		button.addTarget(self, action: "buttonDown:", forControlEvents: UIControlEvents.TouchDown)
 		button.addTarget(self, action: "buttonDrag:", forControlEvents: UIControlEvents.TouchDragOutside)
 		button.layer.borderWidth = 1
-		button.layer.borderColor = UIColor.blackColor().CGColor
+		button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
 		button.layer.cornerRadius = 2
 		button.clipsToBounds = true
 		
 		if let image  = UIImage(named: "char.\(letter.lowercaseString)") {
 			button.setImage(image, forState: UIControlState.Normal)
+			button.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
 		}
 		else{
 			button.backgroundColor = UIColor.redColor()
 		}
 		
-		var DynamicView=UIImageView(frame: CGRectMake(1, button.frame.height - 4, button.frame.width - 2, 4))
-		DynamicView.image = UIImage(named: "halftone2")
-		DynamicView.contentMode = UIViewContentMode.Center;
-		DynamicView.alpha = 0.4
-		DynamicView.clipsToBounds = true
-		button.addSubview(DynamicView)
+//		var DynamicView=UIImageView(frame: CGRectMake(1, button.frame.height - 4, button.frame.width - 2, 4))
+//		DynamicView.image = UIImage(named: "halftone2")
+//		DynamicView.contentMode = UIViewContentMode.Center;
+//		DynamicView.alpha = 0.4
+//		DynamicView.clipsToBounds = true
+//		button.addSubview(DynamicView)
 		
 		view.addSubview(button)
 	}
@@ -253,6 +252,7 @@ class KeyboardViewController: UIInputViewController
 	{
 		keyTimer?.invalidate()
 		sender.frame = CGRectMake(sender.frame.origin.x, sender.frame.origin.y + 4, sender.frame.width, sender.frame.height - 4)
+		sender.layer.borderColor = UIColor.whiteColor().CGColor
 		keyTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("keyHeld"), userInfo: nil, repeats: false)
 	}
 	
@@ -271,34 +271,52 @@ class KeyboardViewController: UIInputViewController
 	{
 		keyTimer?.invalidate()
 		
-		var proxy = textDocumentProxy as UITextDocumentProxy
-		proxy.insertText("")
-		
-		if(sender.tag == 29 ){
+		if( isAltKeyboard == 1 )
+		{
+			if(sender.tag == 0 ){ currentLetter = "'" }
+			else if(sender.tag == 1 ){ currentLetter = "," }
+			else if(sender.tag == 2 ){ currentLetter = "." }
+			else if(sender.tag == 3 ){ currentLetter = "-" }
+				
+			else if(sender.tag == 4 ){ currentLetter = "(" }
+			else if(sender.tag == 5 ){ currentLetter = ")" }
+			else if(sender.tag == 6 ){ currentLetter = ":" }
+			else if(sender.tag == 7 ){ currentLetter = ";" }
+			else if(sender.tag == 8 ){ currentLetter = "@" }
+			else if(sender.tag == 9 ){ currentLetter = "#" }
+			textInject(currentLetter)
+			currentLetter = ""
+		}
+		// Letter Mods
+		else if(sender.tag == 29 ){
+			// Space
 			currentLetter = " "
 			textInject(currentLetter)
-			templateErase()
-			templateStart()
 		}
 		else if(sender.tag == 28 ){
-			templateAlt()
+			// ALT, input nothing
 		}
 		else if(sender.tag == 32 ){
 			currentLetter = " "
 			textBackspace()
-			templateErase()
-			templateStart()
 		}
 		else if(sender.tag == 30 ){
 			currentLetter = " "
 			textEnter()
-			templateErase()
-			templateStart()
 		}
 		else{
 			currentLetter = dataSet(currentLetter)[sender.tag].lowercaseString
 			textInject(currentLetter)
 			currentLetter = currentLetter.lowercaseString
+		}
+		
+		if(sender.tag == 28 && isAltKeyboard == 0 ){
+			isAltKeyboard = 1
+			templateErase()
+			templateAlt()
+		}
+		else{
+			isAltKeyboard = 0
 			templateErase()
 			templateStart()
 		}
@@ -312,9 +330,9 @@ class KeyboardViewController: UIInputViewController
 		geomekeyView = calculatorNib.instantiateWithOwner(self, options: nil)[0] as UIView
 		
 		// add the interface to the main view
-		geomekeyView.backgroundColor = UIColor.whiteColor()
+		geomekeyView.backgroundColor = UIColor.blackColor()
 		view.addSubview(geomekeyView)
-		view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+		view.backgroundColor = UIColor.blackColor()
 		
 		NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("templateStart"), userInfo: nil, repeats: false)
 	}
