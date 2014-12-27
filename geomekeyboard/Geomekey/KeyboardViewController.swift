@@ -93,11 +93,11 @@ class KeyboardViewController: UIInputViewController
 			i += 1
 		}
 		
-		createButton("!", order: 28) // skip
-		createButton("-", order: 29) // space
-		createButton("=", order: 30) // return
-		createButton("?", order: 31) // change keyboard
-		createButton("<", order: 32) // backspace
+		createButton("alt", order: 28) // skip
+		createButton("space", order: 29) // space
+		createButton("enter", order: 30) // return
+		createButton("keyboard", order: 31) // change keyboard
+		createButton("back", order: 32) // backspace
 	}
 	
 	func templateErase()
@@ -160,11 +160,12 @@ class KeyboardViewController: UIInputViewController
 		if order == 31 { buttonFrame = CGRectMake(letterWidth*1, marginTop, letterWidth, letterHeight) } // change
 		if order == 32 { buttonFrame = CGRectMake(vw-(letterWidth*2), marginTop, letterWidth, letterHeight) } // backspace
 		
-		let button   = UIButton.buttonWithType(UIButtonType.System) as UIButton
+		// Button
+		
+		let button   = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
 		
 		button.frame = CGRectMake(buttonFrame!.origin.x + 1, buttonFrame!.origin.y + 1, buttonFrame!.size.width - 2, buttonFrame!.size.height - 2)
 		button.tag = order;
-		
 		if( letter == currentLetter ){
 			button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
 			button.backgroundColor = UIColor.blackColor()
@@ -173,16 +174,27 @@ class KeyboardViewController: UIInputViewController
 			button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
 			button.backgroundColor = UIColor.whiteColor()
 		}
-		
-		button.setTitle(letter.uppercaseString, forState: UIControlState.Normal)
-		
-		button.titleLabel!.font =  UIFont(name: "Helvetica", size: 11)
+//		button.setTitle(letter.lowercaseString, forState: UIControlState.Normal)
+		button.titleLabel!.font =  UIFont(name: "Apple SD Gothic Neo", size: 20)
 		button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+		button.addTarget(self, action: "buttonDown:", forControlEvents: UIControlEvents.TouchDown)
 		button.layer.borderWidth = 1
 		button.layer.borderColor = UIColor.blackColor().CGColor
 		button.layer.cornerRadius = 2
 		
+		if let image  = UIImage(named: "char.\(letter.lowercaseString)") {
+			button.setImage(image, forState: UIControlState.Normal)
+		}
+		else{
+			button.backgroundColor = UIColor.redColor()
+		}
+		
 		view.addSubview(button)
+	}
+	
+	@IBAction func buttonDown(sender: UIButton)
+	{
+		sender.backgroundColor = UIColor.blackColor()
 	}
 	
 	@IBAction func buttonAction(sender: UIButton)
@@ -221,6 +233,7 @@ class KeyboardViewController: UIInputViewController
 		// add the interface to the main view
 		geomekeyView.backgroundColor = UIColor.whiteColor()
 		view.addSubview(geomekeyView)
+		view.backgroundColor = UIColor.whiteColor()
 		
 		NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("templateStart"), userInfo: nil, repeats: false)
 	}
