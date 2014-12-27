@@ -94,7 +94,7 @@ class KeyboardViewController: UIInputViewController
 		
 		var i = 0
 		
-		while( i < 27)
+		while( i < 18)
 		{
 			if(i < targetLayout.count){
 				createButton(targetLayout[i], order: i)
@@ -112,10 +112,48 @@ class KeyboardViewController: UIInputViewController
 	
 	func templateErase()
 	{
-		var subViews = self.view.subviews
+		var subViews = view.subviews
 		for subview in subViews as [UIView]   {
 			subview.removeFromSuperview()
 		}
+	}
+	
+	func templateAlt()
+	{
+		templateErase()
+		
+		var targetLayout:Array = dataSet(currentLetter)
+		
+		createButton("apostrophe", order: 0)
+		createButton("comma", order: 1)
+		createButton("period", order: 2)
+		createButton("dash", order: 3)
+		
+		createButton("parenthesisleft", order: 4)
+		createButton("parenthesisright", order: 5)
+		createButton("colon", order: 6)
+		createButton("semicolon", order: 7)
+		createButton("atsign", order: 8)
+		createButton("hash", order: 9)
+		
+		var i = 18
+		var position = 10
+		
+		while( i < 26)
+		{
+			if(i < targetLayout.count){
+				createButton(targetLayout[i], order: position)
+			}
+			
+			i += 1
+			position += 1
+		}
+		
+		createButton("alt", order: 28) // skip
+		createButton("space", order: 29) // space
+		createButton("enter", order: 30) // return
+		createButton("keyboard", order: 31) // change keyboard
+		createButton("back", order: 32) // backspace
 	}
 	
 	func createButton(letter:String, order:Int)
@@ -182,12 +220,13 @@ class KeyboardViewController: UIInputViewController
 		}
 		else{
 			button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-			button.backgroundColor = UIColor.whiteColor()
+			button.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
 		}
 		
 		button.titleLabel!.font =  UIFont(name: "Apple SD Gothic Neo", size: 20)
 		button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
 		button.addTarget(self, action: "buttonDown:", forControlEvents: UIControlEvents.TouchDown)
+		button.addTarget(self, action: "buttonDrag:", forControlEvents: UIControlEvents.TouchDragOutside)
 		button.layer.borderWidth = 1
 		button.layer.borderColor = UIColor.blackColor().CGColor
 		button.layer.cornerRadius = 2
@@ -203,7 +242,7 @@ class KeyboardViewController: UIInputViewController
 		var DynamicView=UIImageView(frame: CGRectMake(1, button.frame.height - 4, button.frame.width - 2, 4))
 		DynamicView.image = UIImage(named: "halftone2")
 		DynamicView.contentMode = UIViewContentMode.Center;
-		DynamicView.alpha = 0.2
+		DynamicView.alpha = 0.4
 		DynamicView.clipsToBounds = true
 		button.addSubview(DynamicView)
 		
@@ -215,6 +254,12 @@ class KeyboardViewController: UIInputViewController
 		keyTimer?.invalidate()
 		sender.frame = CGRectMake(sender.frame.origin.x, sender.frame.origin.y + 4, sender.frame.width, sender.frame.height - 4)
 		keyTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("keyHeld"), userInfo: nil, repeats: false)
+	}
+	
+	@IBAction func buttonDrag(sender: UIButton)
+	{
+		templateErase()
+		templateStart()
 	}
 	
 	func keyHeld()
@@ -232,23 +277,31 @@ class KeyboardViewController: UIInputViewController
 		if(sender.tag == 29 ){
 			currentLetter = " "
 			textInject(currentLetter)
+			templateErase()
+			templateStart()
+		}
+		else if(sender.tag == 28 ){
+			templateAlt()
 		}
 		else if(sender.tag == 32 ){
 			currentLetter = " "
 			textBackspace()
+			templateErase()
+			templateStart()
 		}
 		else if(sender.tag == 30 ){
 			currentLetter = " "
 			textEnter()
+			templateErase()
+			templateStart()
 		}
 		else{
 			currentLetter = dataSet(currentLetter)[sender.tag].lowercaseString
 			textInject(currentLetter)
 			currentLetter = currentLetter.lowercaseString
+			templateErase()
+			templateStart()
 		}
-		
-		templateErase()
-		templateStart()
 		
 	}
 	
@@ -261,7 +314,7 @@ class KeyboardViewController: UIInputViewController
 		// add the interface to the main view
 		geomekeyView.backgroundColor = UIColor.whiteColor()
 		view.addSubview(geomekeyView)
-		view.backgroundColor = UIColor.whiteColor()
+		view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
 		
 		NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("templateStart"), userInfo: nil, repeats: false)
 	}
