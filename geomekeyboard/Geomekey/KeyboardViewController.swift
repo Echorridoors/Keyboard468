@@ -281,6 +281,16 @@ class KeyboardViewController: UIInputViewController
 			else if(sender.tag == 7 ){ currentLetter = ";" }
 			else if(sender.tag == 8 ){ currentLetter = "@" }
 			else if(sender.tag == 9 ){ currentLetter = "#" }
+				
+			else if(sender.tag == 10 ){ currentLetter = dataSet(currentLetter)[18] }
+			else if(sender.tag == 11 ){ currentLetter = dataSet(currentLetter)[19]}
+			else if(sender.tag == 12 ){ currentLetter = dataSet(currentLetter)[20] }
+			else if(sender.tag == 13 ){ currentLetter = dataSet(currentLetter)[21] }
+			else if(sender.tag == 14 ){ currentLetter = dataSet(currentLetter)[22] }
+			else if(sender.tag == 15 ){ currentLetter = dataSet(currentLetter)[23] }
+			else if(sender.tag == 16 ){ currentLetter = dataSet(currentLetter)[24] }
+			else if(sender.tag == 17 ){ currentLetter = dataSet(currentLetter)[25] }
+			
 			textInject(currentLetter)
 			currentLetter = ""
 		}
