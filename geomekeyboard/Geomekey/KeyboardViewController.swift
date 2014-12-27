@@ -15,6 +15,8 @@ class KeyboardViewController: UIInputViewController
 	@IBOutlet var wrapper: UIView!
     @IBOutlet var nextKeyboardButton: UIButton!
 	var geomekeyView: UIView!
+	var keyTimer:NSTimer?
+	var isKeyHeld = 0
 	
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -38,9 +40,17 @@ class KeyboardViewController: UIInputViewController
 	
 	func textInject( character:String)
 	{
-		println("INSERT: \(character)")
+		println("INSERT: \(character) - \(isKeyHeld)")
 		var proxy = textDocumentProxy as UITextDocumentProxy
-		proxy.insertText(character)
+		
+		if( isKeyHeld == 1 ){
+			proxy.insertText(character.uppercaseString)
+			isKeyHeld = 0
+		}
+		else{
+			proxy.insertText(character)
+		}
+		
 	}
 	
 	func textBackspace()
@@ -174,7 +184,7 @@ class KeyboardViewController: UIInputViewController
 			button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
 			button.backgroundColor = UIColor.whiteColor()
 		}
-//		button.setTitle(letter.lowercaseString, forState: UIControlState.Normal)
+		
 		button.titleLabel!.font =  UIFont(name: "Apple SD Gothic Neo", size: 20)
 		button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
 		button.addTarget(self, action: "buttonDown:", forControlEvents: UIControlEvents.TouchDown)
@@ -202,11 +212,20 @@ class KeyboardViewController: UIInputViewController
 	
 	@IBAction func buttonDown(sender: UIButton)
 	{
-//		sender.titleLabel?.frame = CGRectOffset(sender.titleLabel!.frame, 0, 4)
+		keyTimer?.invalidate()
+		sender.frame = CGRectMake(sender.frame.origin.x, sender.frame.origin.y + 4, sender.frame.width, sender.frame.height - 4)
+		keyTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("keyHeld"), userInfo: nil, repeats: false)
+	}
+	
+	func keyHeld()
+	{
+		isKeyHeld = 1
 	}
 	
 	@IBAction func buttonAction(sender: UIButton)
 	{
+		keyTimer?.invalidate()
+		
 		var proxy = textDocumentProxy as UITextDocumentProxy
 		proxy.insertText("")
 		
@@ -223,8 +242,9 @@ class KeyboardViewController: UIInputViewController
 			textEnter()
 		}
 		else{
-			currentLetter = dataSet(currentLetter)[sender.tag]
+			currentLetter = dataSet(currentLetter)[sender.tag].lowercaseString
 			textInject(currentLetter)
+			currentLetter = currentLetter.lowercaseString
 		}
 		
 		templateErase()
