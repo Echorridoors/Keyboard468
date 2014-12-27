@@ -6,8 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KeyboardViewController" customModule="Geomekey" customModuleProvider="target">
             <connections>
-                <outlet property="pointer1" destination="aEW-12-h4U" id="UNS-Nn-i9z"/>
-                <outlet property="pointer2" destination="To4-sz-ArU" id="EqU-2t-92o"/>
+                <outlet property="row1order1button" destination="DKW-kp-eUf" id="Vxd-Sd-RFj"/>
+                <outlet property="row1order2button" destination="zp5-6O-dsU" id="K5R-Mp-o6b"/>
+                <outlet property="row1order3button" destination="nj9-Gr-Vbg" id="BAh-Vg-7yx"/>
+                <outlet property="row1order4button" destination="EQv-Df-c9j" id="kKB-to-WaS"/>
                 <outlet property="someButton" destination="tSL-cx-X0f" id="oZi-8A-ZCZ"/>
                 <outlet property="wrapper" destination="iN0-l3-epB" id="Q0i-Qu-T9U"/>
             </connections>
@@ -18,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSL-cx-X0f">
-                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                    <rect key="frame" x="0.0" y="130" width="30" height="30"/>
                     <color key="backgroundColor" red="1" green="0.22127328403859958" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -27,14 +29,34 @@
                         <action selector="someBUtton:" destination="-1" eventType="touchUpInside" id="RfP-DT-rDu"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aEW-12-h4U" userLabel="pointer1">
-                    <rect key="frame" x="80" y="40" width="160" height="80"/>
-                    <color key="backgroundColor" red="1" green="0.4194645025" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="To4-sz-ArU" userLabel="pointer2">
-                    <rect key="frame" x="80" y="40" width="160" height="80"/>
-                    <color key="backgroundColor" red="1" green="0.4194645025" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKW-kp-eUf" userLabel="row1order1button">
+                    <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.87699774913400752" green="2.2204460492503131e-16" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="A">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zp5-6O-dsU" userLabel="row1order2button">
+                    <rect key="frame" x="137" y="65" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.87699774913400752" green="2.2204460492503131e-16" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="A">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nj9-Gr-Vbg" userLabel="row1order3button">
+                    <rect key="frame" x="137" y="65" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.87699774913400752" green="2.2204460492503131e-16" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="A">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQv-Df-c9j" userLabel="row1order4button">
+                    <rect key="frame" x="137" y="65" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.87699774913400752" green="2.2204460492503131e-16" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="A">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.56986667798913038" green="0.56986667798913038" blue="0.56986667798913038" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
