@@ -181,6 +181,7 @@ class KeyboardViewController: UIInputViewController
 		button.layer.borderWidth = 1
 		button.layer.borderColor = UIColor.blackColor().CGColor
 		button.layer.cornerRadius = 2
+		button.clipsToBounds = true
 		
 		if let image  = UIImage(named: "char.\(letter.lowercaseString)") {
 			button.setImage(image, forState: UIControlState.Normal)
@@ -188,6 +189,11 @@ class KeyboardViewController: UIInputViewController
 		else{
 			button.backgroundColor = UIColor.redColor()
 		}
+		
+		var DynamicView=UIView(frame: CGRectMake(1, button.frame.height - 4, button.frame.width - 2, 4))
+		DynamicView.backgroundColor=UIColor.blackColor()
+		DynamicView.alpha = 0.2
+		button.addSubview(DynamicView)
 		
 		view.addSubview(button)
 	}
