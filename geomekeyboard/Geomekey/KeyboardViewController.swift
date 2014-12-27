@@ -60,12 +60,6 @@ class KeyboardViewController: UIInputViewController
 		proxy.deleteBackward()
 	}
 	
-	func textEnter()
-	{
-		var proxy = textDocumentProxy as UITextDocumentProxy
-		proxy.returnKeyType
-	}
-	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -296,13 +290,15 @@ class KeyboardViewController: UIInputViewController
 		else if(sender.tag == 28 ){
 			// ALT, input nothing
 		}
+		else if(sender.tag == 31 ){
+			advanceToNextInputMode()
+		}
 		else if(sender.tag == 32 ){
 			currentLetter = " "
 			textBackspace()
 		}
 		else if(sender.tag == 30 ){
-			currentLetter = " "
-			textEnter()
+			currentLetter = "\n"
 		}
 		else{
 			currentLetter = dataSet(currentLetter)[sender.tag].lowercaseString
