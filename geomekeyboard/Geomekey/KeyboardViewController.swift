@@ -168,7 +168,7 @@ class KeyboardViewController: UIInputViewController
 		button.tag = order;
 		if( letter == currentLetter ){
 			button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-			button.backgroundColor = UIColor.blackColor()
+			button.backgroundColor = UIColor.redColor()
 		}
 		else{
 			button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
@@ -190,9 +190,11 @@ class KeyboardViewController: UIInputViewController
 			button.backgroundColor = UIColor.redColor()
 		}
 		
-		var DynamicView=UIView(frame: CGRectMake(1, button.frame.height - 4, button.frame.width - 2, 4))
-		DynamicView.backgroundColor=UIColor.blackColor()
+		var DynamicView=UIImageView(frame: CGRectMake(1, button.frame.height - 4, button.frame.width - 2, 4))
+		DynamicView.image = UIImage(named: "halftone2")
+		DynamicView.contentMode = UIViewContentMode.Center;
 		DynamicView.alpha = 0.2
+		DynamicView.clipsToBounds = true
 		button.addSubview(DynamicView)
 		
 		view.addSubview(button)
@@ -200,7 +202,7 @@ class KeyboardViewController: UIInputViewController
 	
 	@IBAction func buttonDown(sender: UIButton)
 	{
-		sender.backgroundColor = UIColor.blackColor()
+//		sender.titleLabel?.frame = CGRectOffset(sender.titleLabel!.frame, 0, 4)
 	}
 	
 	@IBAction func buttonAction(sender: UIButton)
