@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03476E871A4E697000F8AB17 /* halftone.png in Resources */ = {isa = PBXBuildFile; fileRef = 03476E861A4E697000F8AB17 /* halftone.png */; };
 		03E19BE41A4DF3AA0022643E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E19BE31A4DF3AA0022643E /* AppDelegate.swift */; };
 		03E19BE61A4DF3AA0022643E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E19BE51A4DF3AA0022643E /* ViewController.swift */; };
 		03E19BE91A4DF3AA0022643E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E19BE71A4DF3AA0022643E /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		03476E861A4E697000F8AB17 /* halftone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = halftone.png; sourceTree = "<group>"; };
 		03E19BDE1A4DF3AA0022643E /* geomekeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geomekeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E19BE21A4DF3AA0022643E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03E19BE31A4DF3AA0022643E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		03E19BE01A4DF3AA0022643E /* geomekeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				03476E861A4E697000F8AB17 /* halftone.png */,
 				03E19BE31A4DF3AA0022643E /* AppDelegate.swift */,
 				03E19BE51A4DF3AA0022643E /* ViewController.swift */,
 				03E19BE71A4DF3AA0022643E /* Main.storyboard */,
@@ -270,6 +273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03476E871A4E697000F8AB17 /* halftone.png in Resources */,
 				03E19BE91A4DF3AA0022643E /* Main.storyboard in Resources */,
 				03E19BEE1A4DF3AA0022643E /* LaunchScreen.xib in Resources */,
 				03E19BEB1A4DF3AA0022643E /* Images.xcassets in Resources */,
@@ -532,6 +536,7 @@
 				03E19BFF1A4DF3AA0022643E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		03E19C001A4DF3AA0022643E /* Build configuration list for PBXNativeTarget "geomekeyboardTests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +545,7 @@
 				03E19C021A4DF3AA0022643E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		03E19C101A4DF45C0022643E /* Build configuration list for PBXNativeTarget "Geomekey" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +554,7 @@
 				03E19C121A4DF45C0022643E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

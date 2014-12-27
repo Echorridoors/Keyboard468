@@ -25,7 +25,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.56986667798913038" green="0.56986667798913038" blue="0.56986667798913038" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

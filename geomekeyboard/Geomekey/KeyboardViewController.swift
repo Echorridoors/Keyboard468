@@ -35,13 +35,26 @@ class KeyboardViewController: UIInputViewController
 	{
 	}
 	
-
+	
 	func textInject( character:String)
 	{
 		println("INSERT: \(character)")
 		var proxy = textDocumentProxy as UITextDocumentProxy
 		proxy.insertText(character)
 	}
+	
+	func textBackspace()
+	{
+		var proxy = textDocumentProxy as UITextDocumentProxy
+		proxy.deleteBackward()
+	}
+	
+	func textEnter()
+	{
+		var proxy = textDocumentProxy as UITextDocumentProxy
+		proxy.returnKeyType
+	}
+	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +97,7 @@ class KeyboardViewController: UIInputViewController
 		createButton("-", order: 29) // space
 		createButton("=", order: 30) // return
 		createButton("?", order: 31) // change keyboard
+		createButton("<", order: 32) // backspace
 	}
 	
 	func templateErase()
@@ -141,38 +155,61 @@ class KeyboardViewController: UIInputViewController
 		letterHeight = 54
 		
 		if order == 28 { buttonFrame = CGRectMake(letterWidth*0, marginTop, letterWidth, letterHeight) } // skip
-		if order == 29 { buttonFrame = CGRectMake(letterWidth*2, marginTop, letterWidth*5, letterHeight) } // space
+		if order == 29 { buttonFrame = CGRectMake(letterWidth*2, marginTop, letterWidth*4, letterHeight) } // space
 		if order == 30 { buttonFrame = CGRectMake(vw-letterWidth, marginTop, letterWidth, letterHeight) } // return
 		if order == 31 { buttonFrame = CGRectMake(letterWidth*1, marginTop, letterWidth, letterHeight) } // change
+		if order == 32 { buttonFrame = CGRectMake(vw-(letterWidth*2), marginTop, letterWidth, letterHeight) } // backspace
 		
 		let button   = UIButton.buttonWithType(UIButtonType.System) as UIButton
-		button.frame = buttonFrame!
-		button.tag = order;
-		button.backgroundColor = UIColor.greenColor()
-		button.setTitle(letter, forState: UIControlState.Normal)
-		button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
-//		button.layer.borderWidth = 1
-//		button.layer.borderColor = UIColor.blackColor().CGColor
-		view.addSubview(button)
 		
+		button.frame = CGRectMake(buttonFrame!.origin.x + 1, buttonFrame!.origin.y + 1, buttonFrame!.size.width - 2, buttonFrame!.size.height - 2)
+		button.tag = order;
+		
+		if( letter == currentLetter ){
+			button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+			button.backgroundColor = UIColor.blackColor()
+		}
+		else{
+			button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+			button.backgroundColor = UIColor.whiteColor()
+		}
+		
+		button.setTitle(letter.uppercaseString, forState: UIControlState.Normal)
+		
+		button.titleLabel!.font =  UIFont(name: "Helvetica", size: 11)
+		button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+		button.layer.borderWidth = 1
+		button.layer.borderColor = UIColor.blackColor().CGColor
+		button.layer.cornerRadius = 2
+		
+		view.addSubview(button)
 	}
 	
-	@IBAction func buttonAction(sender: AnyObject)
+	@IBAction func buttonAction(sender: UIButton)
 	{
 		var proxy = textDocumentProxy as UITextDocumentProxy
 		proxy.insertText("")
 		
 		if(sender.tag == 29 ){
 			currentLetter = " "
+			textInject(currentLetter)
+		}
+		else if(sender.tag == 32 ){
+			currentLetter = " "
+			textBackspace()
+		}
+		else if(sender.tag == 30 ){
+			currentLetter = " "
+			textEnter()
 		}
 		else{
 			currentLetter = dataSet(currentLetter)[sender.tag]
+			textInject(currentLetter)
 		}
-		
-		textInject(currentLetter)
 		
 		templateErase()
 		templateStart()
+		
 	}
 	
 	func loadInterface() {
@@ -182,12 +219,10 @@ class KeyboardViewController: UIInputViewController
 		geomekeyView = calculatorNib.instantiateWithOwner(self, options: nil)[0] as UIView
 		
 		// add the interface to the main view
+		geomekeyView.backgroundColor = UIColor.whiteColor()
 		view.addSubview(geomekeyView)
 		
 		NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("templateStart"), userInfo: nil, repeats: false)
-		
-		// copy the background color
-		view.backgroundColor = geomekeyView.backgroundColor
 	}
 	
 
