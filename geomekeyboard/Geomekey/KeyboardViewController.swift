@@ -206,21 +206,23 @@ class KeyboardViewController: UIInputViewController
 		
 		button.frame = CGRectMake(buttonFrame!.origin.x + 1, buttonFrame!.origin.y + 1, buttonFrame!.size.width - 2, buttonFrame!.size.height - 2)
 		button.tag = order;
+		
+		button.layer.borderWidth = 1
+		
 		if( letter == currentLetter ){
-			button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-			button.backgroundColor = UIColor.redColor()
+			button.layer.borderColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1).CGColor
+		}
+		else if( letter.lowercaseString == "a" || letter.lowercaseString == "e" || letter.lowercaseString == "i" || letter.lowercaseString == "i" || letter.lowercaseString == "o" || letter.lowercaseString == "u" ){
+			button.layer.borderColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1).CGColor
 		}
 		else{
-			button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-			button.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+			button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
 		}
 		
 		button.titleLabel!.font =  UIFont(name: "Apple SD Gothic Neo", size: 20)
 		button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
 		button.addTarget(self, action: "buttonDown:", forControlEvents: UIControlEvents.TouchDown)
 		button.addTarget(self, action: "buttonDrag:", forControlEvents: UIControlEvents.TouchDragOutside)
-		button.layer.borderWidth = 1
-		button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
 		button.layer.cornerRadius = 2
 		button.clipsToBounds = true
 		
@@ -232,12 +234,13 @@ class KeyboardViewController: UIInputViewController
 			button.backgroundColor = UIColor.redColor()
 		}
 		
-//		var DynamicView=UIImageView(frame: CGRectMake(1, button.frame.height - 4, button.frame.width - 2, 4))
-//		DynamicView.image = UIImage(named: "halftone2")
-//		DynamicView.contentMode = UIViewContentMode.Center;
-//		DynamicView.alpha = 0.4
-//		DynamicView.clipsToBounds = true
-//		button.addSubview(DynamicView)
+		if( letter == "t" || letter == "d" || letter == "k" || letter == "p" || letter == "b" || letter == "q" ){
+			var DynamicView=UIView(frame: CGRectMake(5, 5, 5, 5))
+			DynamicView.backgroundColor = UIColor.redColor()
+			DynamicView.layer.cornerRadius = 2.5
+			DynamicView.clipsToBounds = true
+			button.addSubview(DynamicView)
+		}
 		
 		view.addSubview(button)
 	}
