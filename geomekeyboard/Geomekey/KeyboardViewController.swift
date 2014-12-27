@@ -94,27 +94,43 @@ class KeyboardViewController: UIInputViewController {
 			render = 1
 		}
 		
-		
-		
 		if( render == 1 ){
+			
+			//TOP CLUSTER
 			if( previousPosition == "" && currentPosition == "top" )    { letterRelease = "t" }
 			if( previousPosition == "top" && currentPosition == "right"){ letterInsert = "h" }
 			if( previousPosition == "top" && currentPosition == "left") { letterInsert = "s" }
 			if( previousPosition == "top" && currentPosition == "top")  { letterInsert = "'" }
 			if( previousPosition == "top" && currentPosition == "down" ){ letterRelease = "m" }
 			
+			//DOWN CLUSTER
+			if( previousPosition == "" && currentPosition == "down" )    { letterRelease = "o" }
+			if( previousPosition == "down" && currentPosition == "right"){ letterInsert = "d" }
+			if( previousPosition == "down" && currentPosition == "left") { letterInsert = "r" }
+			if( previousPosition == "down" && currentPosition == "top" ) { letterRelease = "w" }
+			if( previousPosition == "down" && currentPosition == "down") { letterInsert = "," }
+			
+			//LEFT CLUSTER
+			if( previousPosition == "" && currentPosition == "left" )    { letterRelease = "a" }
+			if( previousPosition == "left" && currentPosition == "right"){ letterRelease = "y" }
+			if( previousPosition == "left" && currentPosition == "left") { letterInsert = "<" }
+			if( previousPosition == "left" && currentPosition == "top" ) { letterInsert = "n" }
+			if( previousPosition == "left" && currentPosition == "down") { letterInsert = "c" }
+			
+			//RIGHT CLUSTER
+			if( previousPosition == "" && currentPosition == "right" )    { letterRelease = "e" }
+			if( previousPosition == "right" && currentPosition == "right"){ letterInsert = ">" }
+			if( previousPosition == "right" && currentPosition == "left") { letterRelease = "u" }
+			if( previousPosition == "right" && currentPosition == "top" ) { letterInsert = "i" }
+			if( previousPosition == "right" && currentPosition == "down") { letterInsert = "l" }
+			
 			if( letterInsert != "" )
 			{
-				println("INSERT: \(letterInsert) - \(currentPosition)")
+				textInject(letterInsert!)
 			}
 			
 			previousPosition = currentPosition
 		}
-		
-		
-		
-		
-		
 		
 		pointer1.frame = CGRectMake(startPressX!, startPressY!, 10, 10)
 		pointer2.frame = CGRectMake(newPoint.x, newPoint.y, 10, 10)
@@ -123,10 +139,27 @@ class KeyboardViewController: UIInputViewController {
 	override func touchesEnded(touches: NSSet, withEvent event: UIEvent)
 	{
 		if( letterRelease != "" ){
-			println("INSERT: \(letterRelease) - \(currentPosition)")
+			textInject(letterRelease!)
 		}
 	}
+	
+	func textSetup()
+	{
+		letterRelease = ""
+		letterInsert = ""
+		
+		previousPosition = ""
+		currentPosition = ""
+	}
 
+	func textInject( character:String)
+	{
+		println("INSERT: \(character)")
+		var proxy = textDocumentProxy as UITextDocumentProxy
+		proxy.insertText(character)
+		textSetup()
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
