@@ -84,7 +84,7 @@ class KeyboardViewController: UIInputViewController
 	
 	func templateStart()
 	{
-		var targetLayout:Array = dataSet(currentLetter)
+		var targetLayout:Array = dataSetOrdered(currentLetter)
 		
 		var i = 0
 		
@@ -114,7 +114,7 @@ class KeyboardViewController: UIInputViewController
 	
 	func templateAlt()
 	{
-		var targetLayout:Array = dataSet(currentLetter)
+		var targetLayout:Array = dataSetOrdered(currentLetter)
 		
 		createButton("apostrophe", order: 0)
 		createButton("comma", order: 1)
@@ -282,14 +282,14 @@ class KeyboardViewController: UIInputViewController
 			else if(sender.tag == 8 ){ currentLetter = "@" }
 			else if(sender.tag == 9 ){ currentLetter = "#" }
 				
-			else if(sender.tag == 10 ){ currentLetter = dataSet(currentLetter)[18] }
-			else if(sender.tag == 11 ){ currentLetter = dataSet(currentLetter)[19]}
-			else if(sender.tag == 12 ){ currentLetter = dataSet(currentLetter)[20] }
-			else if(sender.tag == 13 ){ currentLetter = dataSet(currentLetter)[21] }
-			else if(sender.tag == 14 ){ currentLetter = dataSet(currentLetter)[22] }
-			else if(sender.tag == 15 ){ currentLetter = dataSet(currentLetter)[23] }
-			else if(sender.tag == 16 ){ currentLetter = dataSet(currentLetter)[24] }
-			else if(sender.tag == 17 ){ currentLetter = dataSet(currentLetter)[25] }
+			else if(sender.tag == 10 ){ currentLetter = dataSetOrdered(currentLetter)[18] }
+			else if(sender.tag == 11 ){ currentLetter = dataSetOrdered(currentLetter)[19]}
+			else if(sender.tag == 12 ){ currentLetter = dataSetOrdered(currentLetter)[20] }
+			else if(sender.tag == 13 ){ currentLetter = dataSetOrdered(currentLetter)[21] }
+			else if(sender.tag == 14 ){ currentLetter = dataSetOrdered(currentLetter)[22] }
+			else if(sender.tag == 15 ){ currentLetter = dataSetOrdered(currentLetter)[23] }
+			else if(sender.tag == 16 ){ currentLetter = dataSetOrdered(currentLetter)[24] }
+			else if(sender.tag == 17 ){ currentLetter = dataSetOrdered(currentLetter)[25] }
 			
 			textInject(currentLetter)
 			currentLetter = ""
@@ -314,7 +314,7 @@ class KeyboardViewController: UIInputViewController
 			currentLetter = "\n"
 		}
 		else{
-			currentLetter = dataSet(currentLetter)[sender.tag].lowercaseString
+			currentLetter = dataSetOrdered(currentLetter)[sender.tag].lowercaseString
 			textInject(currentLetter)
 			currentLetter = currentLetter.lowercaseString
 		}
@@ -369,6 +369,14 @@ class KeyboardViewController: UIInputViewController
         self.nextKeyboardButton.setTitleColor(textColor, forState: .Normal)
     }
 	
+	func dataSetOrdered(target:String) -> Array<String>
+	{
+		var segment1 = [dataSet(target)[0],dataSet(target)[1],dataSet(target)[2],dataSet(target)[3]].sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+		var segment2 = [dataSet(target)[4],dataSet(target)[5],dataSet(target)[6],dataSet(target)[7],dataSet(target)[8],dataSet(target)[9]].sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+		var segment3 = [dataSet(target)[10],dataSet(target)[11],dataSet(target)[12],dataSet(target)[13],dataSet(target)[14],dataSet(target)[15],dataSet(target)[16],dataSet(target)[17]].sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+		var segment4 = [dataSet(target)[18],dataSet(target)[19],dataSet(target)[20],dataSet(target)[21],dataSet(target)[22],dataSet(target)[23],dataSet(target)[24],dataSet(target)[25]].sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+		return segment1 + segment2 + segment3 + segment4
+	}
 	
 	func dataSet(target:String) -> Array<String>
 	{
