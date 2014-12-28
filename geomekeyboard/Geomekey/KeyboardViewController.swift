@@ -45,7 +45,18 @@ class KeyboardViewController: UIInputViewController
 		var proxy = textDocumentProxy as UITextDocumentProxy
 		
 		if( isKeyHeld == 1 ){
-			proxy.insertText(character.uppercaseString)
+			if( character == "'" ){ proxy.insertText("0") }
+			else if( character == "," ){ proxy.insertText("1") }
+			else if( character == "." ){ proxy.insertText("2") }
+			else if( character == "-" ){ proxy.insertText("3") }
+			else if( character == "(" ){ proxy.insertText("4") }
+			else if( character == ")" ){ proxy.insertText("5") }
+			else if( character == ":" ){ proxy.insertText("6") }
+			else if( character == ";" ){ proxy.insertText("7") }
+			else if( character == "@" ){ proxy.insertText("8") }
+			else if( character == "#" ){ proxy.insertText("9") }
+			else{ proxy.insertText(character.uppercaseString) }
+			
 			isKeyHeld = 0
 		}
 		else{
@@ -212,9 +223,6 @@ class KeyboardViewController: UIInputViewController
 		if( letter == currentLetter ){
 			button.layer.borderColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1).CGColor
 		}
-		else if( letter.lowercaseString == "a" || letter.lowercaseString == "e" || letter.lowercaseString == "i" || letter.lowercaseString == "i" || letter.lowercaseString == "o" || letter.lowercaseString == "u" ){
-			button.layer.borderColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1).CGColor
-		}
 		else{
 			button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
 		}
@@ -234,12 +242,19 @@ class KeyboardViewController: UIInputViewController
 			button.backgroundColor = UIColor.redColor()
 		}
 		
-		if( letter == "t" || letter == "d" || letter == "k" || letter == "p" || letter == "b" || letter == "q" ){
-			var DynamicView=UIView(frame: CGRectMake(5, 5, 5, 5))
+		if( letter.lowercaseString == "a" || letter.lowercaseString == "e" || letter.lowercaseString == "i" || letter.lowercaseString == "o" || letter.lowercaseString == "u" ){
+			var DynamicView=UIView(frame: CGRectMake( button.frame.width/2 - 1.5 , 5 , 3, 3))
 			DynamicView.backgroundColor = UIColor.redColor()
 			DynamicView.layer.cornerRadius = 2.5
 			DynamicView.clipsToBounds = true
 			button.addSubview(DynamicView)
+		}
+		
+		if( order < 10 && isAltKeyboard == 1 ){
+			var numberImage=UIImageView(frame: CGRectMake( 4 , 3 , 9, 11))
+			numberImage.image = UIImage(named:"char.\(order)")
+			numberImage.alpha = 0.5
+			button.addSubview(numberImage)
 		}
 		
 		view.addSubview(button)
@@ -250,6 +265,7 @@ class KeyboardViewController: UIInputViewController
 		keyTimer?.invalidate()
 		sender.frame = CGRectMake(sender.frame.origin.x, sender.frame.origin.y + 4, sender.frame.width, sender.frame.height - 4)
 		sender.layer.borderColor = UIColor.whiteColor().CGColor
+		sender.backgroundColor = UIColor.whiteColor()
 		keyTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("keyHeld"), userInfo: nil, repeats: false)
 	}
 	
@@ -371,10 +387,52 @@ class KeyboardViewController: UIInputViewController
 	
 	func dataSetOrdered(target:String) -> Array<String>
 	{
-		var segment1 = [dataSet(target)[0],dataSet(target)[1],dataSet(target)[2],dataSet(target)[3]].sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
-		var segment2 = [dataSet(target)[4],dataSet(target)[5],dataSet(target)[6],dataSet(target)[7],dataSet(target)[8],dataSet(target)[9]].sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
-		var segment3 = [dataSet(target)[10],dataSet(target)[11],dataSet(target)[12],dataSet(target)[13],dataSet(target)[14],dataSet(target)[15],dataSet(target)[16],dataSet(target)[17]].sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
-		var segment4 = [dataSet(target)[18],dataSet(target)[19],dataSet(target)[20],dataSet(target)[21],dataSet(target)[22],dataSet(target)[23],dataSet(target)[24],dataSet(target)[25]].sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+		var segment1:[String] = []
+
+		if(dataSet(target).count > 0 ){ segment1.append(dataSet(target)[0]) }
+		if(dataSet(target).count > 1 ){ segment1.append(dataSet(target)[1]) }
+		if(dataSet(target).count > 2 ){ segment1.append(dataSet(target)[2]) }
+		if(dataSet(target).count > 3 ){ segment1.append(dataSet(target)[3]) }
+		
+		segment1 = segment1.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+
+		var segment2:[String] = []
+
+		if(dataSet(target).count > 4 ){ segment2.append(dataSet(target)[4]) }
+		if(dataSet(target).count > 5 ){ segment2.append(dataSet(target)[5]) }
+		if(dataSet(target).count > 6 ){ segment2.append(dataSet(target)[6]) }
+		if(dataSet(target).count > 7 ){ segment2.append(dataSet(target)[7]) }
+		if(dataSet(target).count > 8 ){ segment2.append(dataSet(target)[8]) }
+		if(dataSet(target).count > 9 ){ segment2.append(dataSet(target)[9]) }
+		
+		segment2 = segment2.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+
+		var segment3:[String] = []
+
+		if(dataSet(target).count > 10 ){ segment3.append(dataSet(target)[10]) }
+		if(dataSet(target).count > 11 ){ segment3.append(dataSet(target)[11]) }
+		if(dataSet(target).count > 12 ){ segment3.append(dataSet(target)[12]) }
+		if(dataSet(target).count > 13 ){ segment3.append(dataSet(target)[13]) }
+		if(dataSet(target).count > 14 ){ segment3.append(dataSet(target)[14]) }
+		if(dataSet(target).count > 15 ){ segment3.append(dataSet(target)[15]) }
+		if(dataSet(target).count > 16 ){ segment3.append(dataSet(target)[16]) }
+		if(dataSet(target).count > 17 ){ segment3.append(dataSet(target)[17]) }
+		
+		segment3 = segment3.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+
+		var segment4:[String] = []
+
+		if(dataSet(target).count > 18 ){ segment4.append(dataSet(target)[18]) }
+		if(dataSet(target).count > 19 ){ segment4.append(dataSet(target)[19]) }
+		if(dataSet(target).count > 20 ){ segment4.append(dataSet(target)[20]) }
+		if(dataSet(target).count > 21 ){ segment4.append(dataSet(target)[21]) }
+		if(dataSet(target).count > 22 ){ segment4.append(dataSet(target)[22]) }
+		if(dataSet(target).count > 23 ){ segment4.append(dataSet(target)[23]) }
+		if(dataSet(target).count > 24 ){ segment4.append(dataSet(target)[24]) }
+		if(dataSet(target).count > 25 ){ segment4.append(dataSet(target)[25]) }
+		
+		segment4 = segment4.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+
 		return segment1 + segment2 + segment3 + segment4
 	}
 	
