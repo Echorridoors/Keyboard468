@@ -113,12 +113,29 @@ class KeyboardViewController: UIInputViewController
 		createButton("enter", order: 30) // return
 		createButton("keyboard", order: 31) // change keyboard
 		createButton("back", order: 32) // backspace
+
+		// Animate In
+		var count = 0
+		for subview in view.subviews as [UIView]   {
+			
+			let destination:CGRect = subview.frame
+			let offsetDistance:CGFloat = 40 * CGFloat(count)
+			subview.frame = CGRectOffset(subview.frame, 0, 200 + offsetDistance )
+
+			UIView.animateWithDuration(1, delay:0, options: .CurveEaseOut, animations: {
+				subview.frame = destination
+			}, completion: { finished in
+				println("Basket doors opened!")
+			})
+
+			count += 1
+
+		}
 	}
 	
 	func templateErase()
 	{
-		var subViews = view.subviews
-		for subview in subViews as [UIView]   {
+		for subview in view.subviews as [UIView]   {
 			subview.removeFromSuperview()
 		}
 	}
