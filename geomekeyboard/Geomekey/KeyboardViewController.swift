@@ -38,7 +38,6 @@ class KeyboardViewController: UIInputViewController
 	{
 	}
 	
-	
 	func textInject( character:String)
 	{
 		println("INSERT: \(character) - \(isKeyHeld)")
@@ -148,23 +147,13 @@ class KeyboardViewController: UIInputViewController
 					
 					var currentLetter = targetLayout[currentLetterId]
 					
-					println("\(targetLayout[currentLetterId])")
+					button.frame = keyboardKeyLayouts(currentLetterId)
 					
 					if let image  = UIImage(named: "char.\(currentLetter)") {
 						button.setImage(image, forState: UIControlState.Normal)
-						button.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
-					}
-					else{
-						button.backgroundColor = UIColor.redColor()
+						button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
 					}
 				}
-				
-				
-				
-				
-				
-				NSLog("%@", subview)
-			
 			}
 			
 		}
@@ -176,6 +165,8 @@ class KeyboardViewController: UIInputViewController
 			subview.removeFromSuperview()
 		}
 	}
+	
+	
 	
 	func templateAlt()
 	{
@@ -215,61 +206,13 @@ class KeyboardViewController: UIInputViewController
 	
 	func createButton(letter:String, order:Int)
 	{
-		let vh = self.view!.frame.height
-		let vw = self.view!.frame.width
-		
-		var buttonFrame:CGRect?
-		
-		var letterWidth = vw/4
-		var letterHeight = vh/3
-		var marginTop:CGFloat = 0
-		
-		buttonFrame = CGRectMake(0, 0, 0, 0)
-		
-		if order == 0 { buttonFrame = CGRectMake(letterWidth*0, 0, letterWidth, letterHeight) }
-		if order == 1 { buttonFrame = CGRectMake(letterWidth*1, 0, letterWidth, letterHeight) }
-		if order == 2 { buttonFrame = CGRectMake(letterWidth*2, 0, letterWidth, letterHeight) }
-		if order == 3 { buttonFrame = CGRectMake(letterWidth*3, 0, letterWidth, letterHeight) }
-		
-		marginTop = marginTop + letterHeight
-		letterWidth = vw/6
-		letterHeight = vh/4
-		
-		if order == 4 { buttonFrame = CGRectMake(letterWidth*0, marginTop, letterWidth, letterHeight) }
-		if order == 5 { buttonFrame = CGRectMake(letterWidth*1, marginTop, letterWidth, letterHeight) }
-		if order == 6 { buttonFrame = CGRectMake(letterWidth*2, marginTop, letterWidth, letterHeight) }
-		if order == 7 { buttonFrame = CGRectMake(letterWidth*3, marginTop, letterWidth, letterHeight) }
-		if order == 8 { buttonFrame = CGRectMake(letterWidth*4, marginTop, letterWidth, letterHeight) }
-		if order == 9 { buttonFrame = CGRectMake(letterWidth*5, marginTop, letterWidth, letterHeight) }
-		
-		marginTop = marginTop + letterHeight
-		letterWidth = vw/8
-		letterHeight = vh/6
-		
-		if order == 10 { buttonFrame = CGRectMake(letterWidth*0, marginTop, letterWidth, letterHeight) }
-		if order == 11 { buttonFrame = CGRectMake(letterWidth*1, marginTop, letterWidth, letterHeight) }
-		if order == 12 { buttonFrame = CGRectMake(letterWidth*2, marginTop, letterWidth, letterHeight) }
-		if order == 13 { buttonFrame = CGRectMake(letterWidth*3, marginTop, letterWidth, letterHeight) }
-		if order == 14 { buttonFrame = CGRectMake(letterWidth*4, marginTop, letterWidth, letterHeight) }
-		if order == 15 { buttonFrame = CGRectMake(letterWidth*5, marginTop, letterWidth, letterHeight) }
-		if order == 16 { buttonFrame = CGRectMake(letterWidth*6, marginTop, letterWidth, letterHeight) }
-		if order == 17 { buttonFrame = CGRectMake(letterWidth*7, marginTop, letterWidth, letterHeight) }
-		
-		marginTop = (vh/3) + (vh/4) + (vh/6)
-		letterWidth = vw/8
-		letterHeight = 54
-		
-		if order == 28 { buttonFrame = CGRectMake(letterWidth*0, marginTop, letterWidth, letterHeight) } // skip
-		if order == 29 { buttonFrame = CGRectMake(letterWidth*2, marginTop, letterWidth*4, letterHeight) } // space
-		if order == 30 { buttonFrame = CGRectMake(vw-letterWidth, marginTop, letterWidth, letterHeight) } // return
-		if order == 31 { buttonFrame = CGRectMake(letterWidth*1, marginTop, letterWidth, letterHeight) } // change
-		if order == 32 { buttonFrame = CGRectMake(vw-(letterWidth*2), marginTop, letterWidth, letterHeight) } // backspace
+		let buttonFrame:CGRect = keyboardKeyLayouts(order)
 		
 		// Button
 		
 		let button   = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
 		
-		button.frame = CGRectMake(buttonFrame!.origin.x + 1, buttonFrame!.origin.y + 1, buttonFrame!.size.width - 2, buttonFrame!.size.height - 2)
+		button.frame = buttonFrame
 		button.tag = order;
 		
 		button.layer.borderWidth = 1
@@ -295,14 +238,6 @@ class KeyboardViewController: UIInputViewController
 			button.backgroundColor = UIColor.redColor()
 		}
 		
-		if( letter.lowercaseString == "a" || letter.lowercaseString == "e" || letter.lowercaseString == "i" || letter.lowercaseString == "o" || letter.lowercaseString == "u" ){
-			var DynamicView=UIView(frame: CGRectMake( button.frame.width/2 - 1.5 , 5 , 3, 3))
-			DynamicView.backgroundColor = UIColor.redColor()
-			DynamicView.layer.cornerRadius = 2.5
-			DynamicView.clipsToBounds = true
-			button.addSubview(DynamicView)
-		}
-		
 		if( order < 10 && isAltKeyboard == 1 ){
 			var numberImage=UIImageView(frame: CGRectMake( 4 , 3 , 9, 11))
 			numberImage.image = UIImage(named:"char.\(order)")
@@ -320,6 +255,13 @@ class KeyboardViewController: UIInputViewController
 		sender.layer.borderColor = UIColor.whiteColor().CGColor
 		sender.backgroundColor = UIColor.whiteColor()
 		keyTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("keyHeld"), userInfo: nil, repeats: false)
+		
+		UIView.animateWithDuration(0.7, delay:0, options: .CurveEaseOut, animations: {
+			sender.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+			sender.frame = self.keyboardKeyLayouts(sender.tag)
+			}, completion: { finished in
+				println("Basket doors opened!")
+		})
 	}
 	
 	@IBAction func buttonDrag(sender: UIButton)
@@ -483,6 +425,13 @@ class KeyboardViewController: UIInputViewController
 		
 		segment4 = segment4.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
 
+		// ALT
+		
+		if( isAltKeyboard == 1 ){
+			segment1 = ["apostrophe","comma","period","dash"]
+			segment2 = ["parenthesisleft","parenthesisright","colon","semicolon","atsign","hash"]
+		}
+		
 		return segment1 + segment2 + segment3 + segment4
 	}
 	
@@ -516,6 +465,62 @@ class KeyboardViewController: UIInputViewController
 		else if target == "z" { return ["e","a","o","i","y","z","u","l","w","d","r","m","c","h","k","s","n","g","t","p","b","f","v"] }
 		else { return ["e","t","a","o","i","n","s","h","r","d","l","c","u","m","w","f","g","y","p","b","v","k","j","x","q","z"] }
 
+	}
+	func keyboardKeyLayouts(order:Int) -> CGRect
+	{
+		let vh = self.view!.frame.height
+		let vw = self.view!.frame.width
+		
+		var buttonFrame:CGRect
+		
+		var letterWidth = vw/4
+		var letterHeight = vh/3
+		var marginTop:CGFloat = 0
+		
+		buttonFrame = CGRectMake(0, 0, 0, 0)
+		
+		if order == 0 { buttonFrame = CGRectMake(letterWidth*0, 0, letterWidth, letterHeight) }
+		if order == 1 { buttonFrame = CGRectMake(letterWidth*1, 0, letterWidth, letterHeight) }
+		if order == 2 { buttonFrame = CGRectMake(letterWidth*2, 0, letterWidth, letterHeight) }
+		if order == 3 { buttonFrame = CGRectMake(letterWidth*3, 0, letterWidth, letterHeight) }
+		
+		marginTop = marginTop + letterHeight
+		letterWidth = vw/6
+		letterHeight = vh/4
+		
+		if order == 4 { buttonFrame = CGRectMake(letterWidth*0, marginTop, letterWidth, letterHeight) }
+		if order == 5 { buttonFrame = CGRectMake(letterWidth*1, marginTop, letterWidth, letterHeight) }
+		if order == 6 { buttonFrame = CGRectMake(letterWidth*2, marginTop, letterWidth, letterHeight) }
+		if order == 7 { buttonFrame = CGRectMake(letterWidth*3, marginTop, letterWidth, letterHeight) }
+		if order == 8 { buttonFrame = CGRectMake(letterWidth*4, marginTop, letterWidth, letterHeight) }
+		if order == 9 { buttonFrame = CGRectMake(letterWidth*5, marginTop, letterWidth, letterHeight) }
+		
+		marginTop = marginTop + letterHeight
+		letterWidth = vw/8
+		letterHeight = vh/6
+		
+		if order == 10 { buttonFrame = CGRectMake(letterWidth*0, marginTop, letterWidth, letterHeight) }
+		if order == 11 { buttonFrame = CGRectMake(letterWidth*1, marginTop, letterWidth, letterHeight) }
+		if order == 12 { buttonFrame = CGRectMake(letterWidth*2, marginTop, letterWidth, letterHeight) }
+		if order == 13 { buttonFrame = CGRectMake(letterWidth*3, marginTop, letterWidth, letterHeight) }
+		if order == 14 { buttonFrame = CGRectMake(letterWidth*4, marginTop, letterWidth, letterHeight) }
+		if order == 15 { buttonFrame = CGRectMake(letterWidth*5, marginTop, letterWidth, letterHeight) }
+		if order == 16 { buttonFrame = CGRectMake(letterWidth*6, marginTop, letterWidth, letterHeight) }
+		if order == 17 { buttonFrame = CGRectMake(letterWidth*7, marginTop, letterWidth, letterHeight) }
+		
+		marginTop = (vh/3) + (vh/4) + (vh/6)
+		letterWidth = vw/8
+		letterHeight = 54
+		
+		if order == 28 { buttonFrame = CGRectMake(letterWidth*0, marginTop, letterWidth, letterHeight) } // skip
+		if order == 29 { buttonFrame = CGRectMake(letterWidth*2, marginTop, letterWidth*4, letterHeight) } // space
+		if order == 30 { buttonFrame = CGRectMake(vw-letterWidth, marginTop, letterWidth, letterHeight) } // return
+		if order == 31 { buttonFrame = CGRectMake(letterWidth*1, marginTop, letterWidth, letterHeight) } // change
+		if order == 32 { buttonFrame = CGRectMake(vw-(letterWidth*2), marginTop, letterWidth, letterHeight) } // backspace
+		
+		buttonFrame = CGRectMake(buttonFrame.origin.x + 1, buttonFrame.origin.y + 1, buttonFrame.size.width - 2, buttonFrame.size.height - 2)
+		
+		return buttonFrame
 	}
 
 }
