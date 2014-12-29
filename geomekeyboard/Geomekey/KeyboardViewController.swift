@@ -8,7 +8,7 @@
 
 import UIKit
 
-var currentLetter:String = "other"
+var currentLetter:String = ""
 
 class KeyboardViewController: UIInputViewController
 {
@@ -121,10 +121,9 @@ class KeyboardViewController: UIInputViewController
 			let offsetDistance:CGFloat = 40 * CGFloat(count)
 			subview.frame = CGRectOffset(subview.frame, 0, 200 + offsetDistance )
 
-			UIView.animateWithDuration(1, delay:0, options: .CurveEaseOut, animations: {
+			UIView.animateWithDuration(0.7, delay:0, options: .CurveEaseOut, animations: {
 				subview.frame = destination
 			}, completion: { finished in
-				println("Basket doors opened!")
 			})
 
 			count += 1
@@ -157,51 +156,6 @@ class KeyboardViewController: UIInputViewController
 			}
 			
 		}
-	}
-	
-	func templateErase()
-	{
-		for subview in view.subviews as [UIView]   {
-			subview.removeFromSuperview()
-		}
-	}
-	
-	
-	
-	func templateAlt()
-	{
-		var targetLayout:Array = dataSetOrdered(currentLetter)
-		
-		createButton("apostrophe", order: 0)
-		createButton("comma", order: 1)
-		createButton("period", order: 2)
-		createButton("dash", order: 3)
-		
-		createButton("parenthesisleft", order: 4)
-		createButton("parenthesisright", order: 5)
-		createButton("colon", order: 6)
-		createButton("semicolon", order: 7)
-		createButton("atsign", order: 8)
-		createButton("hash", order: 9)
-		
-		var i = 18
-		var position = 10
-		
-		while( i < 26)
-		{
-			if(i < targetLayout.count){
-				createButton(targetLayout[i], order: position)
-			}
-			
-			i += 1
-			position += 1
-		}
-		
-		createButton("alt", order: 28) // skip
-		createButton("space", order: 29) // space
-		createButton("enter", order: 30) // return
-		createButton("keyboard", order: 31) // change keyboard
-		createButton("back", order: 32) // backspace
 	}
 	
 	func createButton(letter:String, order:Int)
@@ -252,7 +206,6 @@ class KeyboardViewController: UIInputViewController
 	{
 		keyTimer?.invalidate()
 		sender.frame = CGRectMake(sender.frame.origin.x, sender.frame.origin.y + 6, sender.frame.width, sender.frame.height - 6)
-		sender.layer.borderColor = UIColor.whiteColor().CGColor
 		sender.backgroundColor = UIColor.whiteColor()
 		keyTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("keyHeld"), userInfo: nil, repeats: false)
 		
@@ -260,7 +213,6 @@ class KeyboardViewController: UIInputViewController
 			sender.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
 			sender.frame = self.keyboardKeyLayouts(sender.tag)
 			}, completion: { finished in
-				println("Basket doors opened!")
 		})
 	}
 	
@@ -292,14 +244,14 @@ class KeyboardViewController: UIInputViewController
 			else if(sender.tag == 8 ){ currentLetter = "@" }
 			else if(sender.tag == 9 ){ currentLetter = "#" }
 				
-			else if(sender.tag == 10 ){ currentLetter = dataSetOrdered(currentLetter)[18] }
-			else if(sender.tag == 11 ){ currentLetter = dataSetOrdered(currentLetter)[19]}
-			else if(sender.tag == 12 ){ currentLetter = dataSetOrdered(currentLetter)[20] }
-			else if(sender.tag == 13 ){ currentLetter = dataSetOrdered(currentLetter)[21] }
-			else if(sender.tag == 14 ){ currentLetter = dataSetOrdered(currentLetter)[22] }
-			else if(sender.tag == 15 ){ currentLetter = dataSetOrdered(currentLetter)[23] }
-			else if(sender.tag == 16 ){ currentLetter = dataSetOrdered(currentLetter)[24] }
-			else if(sender.tag == 17 ){ currentLetter = dataSetOrdered(currentLetter)[25] }
+			else if(sender.tag == 10 ){ currentLetter = dataSetOrdered(currentLetter)[10] }
+			else if(sender.tag == 11 ){ currentLetter = dataSetOrdered(currentLetter)[11]}
+			else if(sender.tag == 12 ){ currentLetter = dataSetOrdered(currentLetter)[12] }
+			else if(sender.tag == 13 ){ currentLetter = dataSetOrdered(currentLetter)[13] }
+			else if(sender.tag == 14 ){ currentLetter = dataSetOrdered(currentLetter)[14] }
+			else if(sender.tag == 15 ){ currentLetter = dataSetOrdered(currentLetter)[15] }
+			else if(sender.tag == 16 ){ currentLetter = dataSetOrdered(currentLetter)[16] }
+			else if(sender.tag == 17 ){ currentLetter = dataSetOrdered(currentLetter)[17] }
 			
 			textInject(currentLetter)
 			currentLetter = ""
