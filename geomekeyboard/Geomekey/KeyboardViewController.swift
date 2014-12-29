@@ -308,11 +308,12 @@ class KeyboardViewController: UIInputViewController
 			}
 			templateUpdate()
 		}
+		else if( isAltKeyboard == 2 && sender.tag != 28){
+			
+		}
 		else{
-			if( isAltKeyboard != 2 && sender.tag != 28 ){
-				isAltKeyboard = 0
-				templateUpdate()
-			}
+			isAltKeyboard = 0
+			templateUpdate()
 		}
 		
 		sender.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
@@ -320,7 +321,8 @@ class KeyboardViewController: UIInputViewController
 		
 	}
 	
-	func loadInterface() {
+	func loadInterface()
+	{
 		// load the nib file
 		var calculatorNib = UINib(nibName: "geomekey", bundle: nil)
 		// instantiate the view
@@ -334,7 +336,6 @@ class KeyboardViewController: UIInputViewController
 		interfaceReady = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("templateStart"), userInfo: nil, repeats: true)
 	}
 	
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated
@@ -415,7 +416,7 @@ class KeyboardViewController: UIInputViewController
 		if( isAltKeyboard == 2 ){
 			segment1 = ["0","1","2","3"]
 			segment2 = ["4","5","6","7","8","9"]
-			segment3 = [""]
+			segment3 = segment4
 		}
 		
 		return segment1 + segment2 + segment3
