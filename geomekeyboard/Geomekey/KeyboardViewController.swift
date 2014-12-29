@@ -309,8 +309,10 @@ class KeyboardViewController: UIInputViewController
 			templateUpdate()
 		}
 		else{
-			isAltKeyboard = 0
-			templateUpdate()
+			if( isAltKeyboard != 2 && sender.tag != 28 ){
+				isAltKeyboard = 0
+				templateUpdate()
+			}
 		}
 		
 		sender.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
