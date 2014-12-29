@@ -16,6 +16,8 @@ class KeyboardViewController: UIInputViewController
     @IBOutlet var nextKeyboardButton: UIButton!
 	var geomekeyView: UIView!
 	var keyTimer:NSTimer?
+	var keyRepeatTimer:NSTimer?
+	var interfaceReady:NSTimer?
 	var isKeyHeld = 0
 	var isAltKeyboard = 0
 	
@@ -93,6 +95,15 @@ class KeyboardViewController: UIInputViewController
 	
 	func templateStart()
 	{
+		if( view.frame.width > 0 ){
+			println("Loading interface, done.")
+			interfaceReady?.invalidate()
+		}
+		else{
+			println("Trying to load interface, retrying in 0.1sec")
+			return
+		}
+		
 		var targetLayout:Array = dataSetOrdered(currentLetter)
 		
 		var i = 0
@@ -120,13 +131,12 @@ class KeyboardViewController: UIInputViewController
 			let offsetDistance:CGFloat = 40 * CGFloat(count)
 			subview.frame = CGRectOffset(subview.frame, 0, 200 + offsetDistance )
 
-			UIView.animateWithDuration(0.6, delay:0, options: .CurveEaseOut, animations: {
+			UIView.animateWithDuration(0.5, delay:0, options: .CurveEaseOut, animations: {
 				subview.frame = destination
 			}, completion: { finished in
 			})
 
 			count += 1
-
 		}
 	}
 
@@ -151,7 +161,7 @@ class KeyboardViewController: UIInputViewController
 						button.setImage(image, forState: UIControlState.Normal)
 						
 						if( currentLetter == currentLetterString ){
-							button.layer.borderColor = UIColor(red: 1, green: 0.0, blue: 0.0, alpha: 1).CGColor
+							button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
 						}
 						else{
 							button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
@@ -215,7 +225,9 @@ class KeyboardViewController: UIInputViewController
 		sender.backgroundColor = UIColor.whiteColor()
 		keyTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("keyHeld"), userInfo: nil, repeats: false)
 		
-		
+		if(sender.tag == 32 ){
+			keyRepeatTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("textBackspace"), userInfo: nil, repeats: true)
+		}
 	}
 	
 	@IBAction func buttonDrag(sender: UIButton)
@@ -231,6 +243,7 @@ class KeyboardViewController: UIInputViewController
 	@IBAction func buttonAction(sender: UIButton)
 	{
 		keyTimer?.invalidate()
+		keyRepeatTimer?.invalidate()
 		
 		if( isAltKeyboard == 1 )
 		{
@@ -271,7 +284,7 @@ class KeyboardViewController: UIInputViewController
 			advanceToNextInputMode()
 		}
 		else if(sender.tag == 32 ){
-			currentLetter = " "
+			currentLetter = ""
 			textBackspace()
 		}
 		else if(sender.tag == 30 ){
@@ -293,11 +306,8 @@ class KeyboardViewController: UIInputViewController
 			templateUpdate()
 		}
 		
-		UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseOut, animations: {
-			sender.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
-			sender.frame = self.keyboardKeyLayouts(sender.tag)
-			}, completion: { finished in
-		})
+		sender.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+		sender.frame = self.keyboardKeyLayouts(sender.tag)
 		
 	}
 	
@@ -312,7 +322,7 @@ class KeyboardViewController: UIInputViewController
 		view.addSubview(geomekeyView)
 		view.backgroundColor = UIColor.blackColor()
 		
-		NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("templateStart"), userInfo: nil, repeats: false)
+		interfaceReady = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("templateStart"), userInfo: nil, repeats: true)
 	}
 	
 

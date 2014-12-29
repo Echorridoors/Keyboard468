@@ -104,6 +104,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		030AC9A81A51A7CD003AAAA0 /* Geomekey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Geomekey.entitlements; sourceTree = "<group>"; };
 		03170CB01A4F075800BB6E56 /* char.0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char.0.png; sourceTree = "<group>"; };
 		03170CB21A4F096E00BB6E56 /* char.a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char.a.png; sourceTree = "<group>"; };
 		03170CB31A4F096E00BB6E56 /* char.b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char.b.png; sourceTree = "<group>"; };
@@ -320,6 +321,7 @@
 		03E19C081A4DF45C0022643E /* Geomekey */ = {
 			isa = PBXGroup;
 			children = (
+				030AC9A81A51A7CD003AAAA0 /* Geomekey.entitlements */,
 				03170CF51A4F135400BB6E56 /* halftone2.png */,
 				03170CE01A4F0C1B00BB6E56 /* characters */,
 				03E19C0B1A4DF45C0022643E /* KeyboardViewController.swift */,
@@ -412,6 +414,12 @@
 					};
 					03E19C061A4DF45C0022643E = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = B948MFAE5C;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -716,6 +724,9 @@
 		03E19C111A4DF45C0022643E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Geomekey/Geomekey.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -723,6 +734,7 @@
 				INFOPLIST_FILE = Geomekey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -730,9 +742,13 @@
 		03E19C121A4DF45C0022643E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Geomekey/Geomekey.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Geomekey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
