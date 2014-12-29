@@ -251,7 +251,7 @@ class KeyboardViewController: UIInputViewController
 	@IBAction func buttonDown(sender: UIButton)
 	{
 		keyTimer?.invalidate()
-		sender.frame = CGRectMake(sender.frame.origin.x, sender.frame.origin.y + 4, sender.frame.width, sender.frame.height - 4)
+		sender.frame = CGRectMake(sender.frame.origin.x, sender.frame.origin.y + 6, sender.frame.width, sender.frame.height - 6)
 		sender.layer.borderColor = UIColor.whiteColor().CGColor
 		sender.backgroundColor = UIColor.whiteColor()
 		keyTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("keyHeld"), userInfo: nil, repeats: false)
@@ -430,9 +430,10 @@ class KeyboardViewController: UIInputViewController
 		if( isAltKeyboard == 1 ){
 			segment1 = ["apostrophe","comma","period","dash"]
 			segment2 = ["parenthesisleft","parenthesisright","colon","semicolon","atsign","hash"]
+			segment3 = segment4
 		}
 		
-		return segment1 + segment2 + segment3 + segment4
+		return segment1 + segment2 + segment3
 	}
 	
 	func dataSet(target:String) -> Array<String>
