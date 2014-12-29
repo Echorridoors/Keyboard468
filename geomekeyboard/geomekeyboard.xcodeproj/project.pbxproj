@@ -50,6 +50,7 @@
 		035A70B11A509FCB00186306 /* char.7.png in Resources */ = {isa = PBXBuildFile; fileRef = 035A70A81A509FCB00186306 /* char.7.png */; };
 		035A70B21A509FCB00186306 /* char.8.png in Resources */ = {isa = PBXBuildFile; fileRef = 035A70A91A509FCB00186306 /* char.8.png */; };
 		035A70B31A509FCB00186306 /* char.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 035A70AA1A509FCB00186306 /* char.9.png */; };
+		037ECEE11A50EC6D00B14AC1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 037ECEE01A50EC6D00B14AC1 /* logo.png */; };
 		03E19BE41A4DF3AA0022643E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E19BE31A4DF3AA0022643E /* AppDelegate.swift */; };
 		03E19BE61A4DF3AA0022643E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E19BE51A4DF3AA0022643E /* ViewController.swift */; };
 		03E19BE91A4DF3AA0022643E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E19BE71A4DF3AA0022643E /* Main.storyboard */; };
@@ -146,6 +147,7 @@
 		035A70A81A509FCB00186306 /* char.7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char.7.png; sourceTree = "<group>"; };
 		035A70A91A509FCB00186306 /* char.8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char.8.png; sourceTree = "<group>"; };
 		035A70AA1A509FCB00186306 /* char.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char.9.png; sourceTree = "<group>"; };
+		037ECEE01A50EC6D00B14AC1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		03E19BDE1A4DF3AA0022643E /* geomekeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geomekeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E19BE21A4DF3AA0022643E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03E19BE31A4DF3AA0022643E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 		03E19BE01A4DF3AA0022643E /* geomekeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				037ECEE01A50EC6D00B14AC1 /* logo.png */,
 				03E19BE31A4DF3AA0022643E /* AppDelegate.swift */,
 				03E19BE51A4DF3AA0022643E /* ViewController.swift */,
 				03E19BE71A4DF3AA0022643E /* Main.storyboard */,
@@ -437,6 +440,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				037ECEE11A50EC6D00B14AC1 /* logo.png in Resources */,
 				03E19BE91A4DF3AA0022643E /* Main.storyboard in Resources */,
 				03E19BEE1A4DF3AA0022643E /* LaunchScreen.xib in Resources */,
 				03E19BEB1A4DF3AA0022643E /* Images.xcassets in Resources */,

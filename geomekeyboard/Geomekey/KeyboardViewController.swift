@@ -55,7 +55,6 @@ class KeyboardViewController: UIInputViewController
 			else if( character == "@" ){ proxy.insertText("8") }
 			else if( character == "#" ){ proxy.insertText("9") }
 			else{ proxy.insertText(character.uppercaseString) }
-			
 			isKeyHeld = 0
 		}
 		else{
@@ -121,7 +120,7 @@ class KeyboardViewController: UIInputViewController
 			let offsetDistance:CGFloat = 40 * CGFloat(count)
 			subview.frame = CGRectOffset(subview.frame, 0, 200 + offsetDistance )
 
-			UIView.animateWithDuration(0.7, delay:0, options: .CurveEaseOut, animations: {
+			UIView.animateWithDuration(0.6, delay:0, options: .CurveEaseOut, animations: {
 				subview.frame = destination
 			}, completion: { finished in
 			})
@@ -144,13 +143,20 @@ class KeyboardViewController: UIInputViewController
 				
 				if( currentLetterId < targetLayout.count ){
 					
-					var currentLetter = targetLayout[currentLetterId]
+					var currentLetterString = targetLayout[currentLetterId]
 					
 					button.frame = keyboardKeyLayouts(currentLetterId)
 					
-					if let image  = UIImage(named: "char.\(currentLetter)") {
+					if let image  = UIImage(named: "char.\(currentLetterString)") {
 						button.setImage(image, forState: UIControlState.Normal)
-						button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
+						
+						if( currentLetter == currentLetterString ){
+							button.layer.borderColor = UIColor(red: 1, green: 0.0, blue: 0.0, alpha: 1).CGColor
+						}
+						else{
+							button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
+						}
+						
 					}
 				}
 			}
@@ -209,11 +215,7 @@ class KeyboardViewController: UIInputViewController
 		sender.backgroundColor = UIColor.whiteColor()
 		keyTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("keyHeld"), userInfo: nil, repeats: false)
 		
-		UIView.animateWithDuration(0.7, delay:0, options: .CurveEaseOut, animations: {
-			sender.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
-			sender.frame = self.keyboardKeyLayouts(sender.tag)
-			}, completion: { finished in
-		})
+		
 	}
 	
 	@IBAction func buttonDrag(sender: UIButton)
@@ -274,6 +276,7 @@ class KeyboardViewController: UIInputViewController
 		}
 		else if(sender.tag == 30 ){
 			currentLetter = "\n"
+			textInject(currentLetter)
 		}
 		else{
 			currentLetter = dataSetOrdered(currentLetter)[sender.tag].lowercaseString
@@ -289,6 +292,12 @@ class KeyboardViewController: UIInputViewController
 			isAltKeyboard = 0
 			templateUpdate()
 		}
+		
+		UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseOut, animations: {
+			sender.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+			sender.frame = self.keyboardKeyLayouts(sender.tag)
+			}, completion: { finished in
+		})
 		
 	}
 	
