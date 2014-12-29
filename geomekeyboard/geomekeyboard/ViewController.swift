@@ -9,9 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-	@IBOutlet var hintLabel: UILabel!
-	@IBOutlet var PracticeInput: UITextField!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -21,10 +18,6 @@ class ViewController: UIViewController {
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
-	}
-	@IBAction func PracticeInput(sender: UITextField)
-	{
-		NSLog("> %@", sender.text)
 	}
 
 

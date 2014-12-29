@@ -56,6 +56,7 @@ class KeyboardViewController: UIInputViewController
 			else if( character == "+" ){ proxy.insertText("*") }
 			else if( character == "/" ){ proxy.insertText("\\") }
 			else if( character == "!" ){ proxy.insertText("?") }
+			else if( character == " " ){ proxy.insertText(". ") }
 			else{ proxy.insertText(character.uppercaseString) }
 			isKeyHeld = 0
 		}
@@ -333,7 +334,7 @@ class KeyboardViewController: UIInputViewController
 		view.addSubview(geomekeyView)
 		view.backgroundColor = UIColor.blackColor()
 		
-		interfaceReady = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("templateStart"), userInfo: nil, repeats: true)
+		interfaceReady = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("templateStart"), userInfo: nil, repeats: true)		
 	}
 	
     override func didReceiveMemoryWarning() {
