@@ -132,6 +132,43 @@ class KeyboardViewController: UIInputViewController
 
 		}
 	}
+
+	func templateUpdate()
+	{
+		var targetLayout:Array = dataSetOrdered(currentLetter)
+		
+		for subview in view.subviews as [UIView] {
+			
+			if ( subview is UIButton ) {
+				var button = subview as UIButton
+				
+				var currentLetterId:Int = Int(subview.tag)
+				
+				if( currentLetterId < targetLayout.count ){
+					
+					var currentLetter = targetLayout[currentLetterId]
+					
+					println("\(targetLayout[currentLetterId])")
+					
+					if let image  = UIImage(named: "char.\(currentLetter)") {
+						button.setImage(image, forState: UIControlState.Normal)
+						button.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+					}
+					else{
+						button.backgroundColor = UIColor.redColor()
+					}
+				}
+				
+				
+				
+				
+				
+				NSLog("%@", subview)
+			
+			}
+			
+		}
+	}
 	
 	func templateErase()
 	{
@@ -244,7 +281,6 @@ class KeyboardViewController: UIInputViewController
 			button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
 		}
 		
-		button.titleLabel!.font =  UIFont(name: "Apple SD Gothic Neo", size: 20)
 		button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
 		button.addTarget(self, action: "buttonDown:", forControlEvents: UIControlEvents.TouchDown)
 		button.addTarget(self, action: "buttonDrag:", forControlEvents: UIControlEvents.TouchDragOutside)
@@ -288,8 +324,7 @@ class KeyboardViewController: UIInputViewController
 	
 	@IBAction func buttonDrag(sender: UIButton)
 	{
-		templateErase()
-		templateStart()
+		templateUpdate()
 	}
 	
 	func keyHeld()
@@ -354,13 +389,11 @@ class KeyboardViewController: UIInputViewController
 		
 		if(sender.tag == 28 && isAltKeyboard == 0 ){
 			isAltKeyboard = 1
-			templateErase()
-			templateAlt()
+			templateUpdate()
 		}
 		else{
 			isAltKeyboard = 0
-			templateErase()
-			templateStart()
+			templateUpdate()
 		}
 		
 	}
