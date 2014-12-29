@@ -46,16 +46,16 @@ class KeyboardViewController: UIInputViewController
 		var proxy = textDocumentProxy as UITextDocumentProxy
 		
 		if( isKeyHeld == 1 ){
-			if( character == "'" ){ proxy.insertText("0") }
-			else if( character == "," ){ proxy.insertText("1") }
-			else if( character == "." ){ proxy.insertText("2") }
-			else if( character == "-" ){ proxy.insertText("3") }
-			else if( character == "(" ){ proxy.insertText("4") }
-			else if( character == ")" ){ proxy.insertText("5") }
-			else if( character == ":" ){ proxy.insertText("6") }
-			else if( character == ";" ){ proxy.insertText("7") }
-			else if( character == "@" ){ proxy.insertText("8") }
-			else if( character == "#" ){ proxy.insertText("9") }
+			if( character == "'" ){ proxy.insertText("\"") }
+			else if( character == ":" ){ proxy.insertText(":") }
+			else if( character == "." ){ proxy.insertText(",") }
+			else if( character == "-" ){ proxy.insertText("_") }
+			else if( character == "(" ){ proxy.insertText("[") }
+			else if( character == ")" ){ proxy.insertText("]") }
+			else if( character == "@" ){ proxy.insertText("#") }
+			else if( character == "+" ){ proxy.insertText("*") }
+			else if( character == "/" ){ proxy.insertText("\\") }
+			else if( character == "!" ){ proxy.insertText("?") }
 			else{ proxy.insertText(character.uppercaseString) }
 			isKeyHeld = 0
 		}
@@ -228,6 +228,7 @@ class KeyboardViewController: UIInputViewController
 		if(sender.tag == 32 ){
 			keyRepeatTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("textBackspace"), userInfo: nil, repeats: true)
 		}
+		
 	}
 	
 	@IBAction func buttonDrag(sender: UIButton)
@@ -248,16 +249,16 @@ class KeyboardViewController: UIInputViewController
 		if( isAltKeyboard == 1 )
 		{
 			if(sender.tag == 0 ){ currentLetter = "'" }
-			else if(sender.tag == 1 ){ currentLetter = "," }
+			else if(sender.tag == 1 ){ currentLetter = ":" }
 			else if(sender.tag == 2 ){ currentLetter = "." }
 			else if(sender.tag == 3 ){ currentLetter = "-" }
 				
 			else if(sender.tag == 4 ){ currentLetter = "(" }
 			else if(sender.tag == 5 ){ currentLetter = ")" }
-			else if(sender.tag == 6 ){ currentLetter = ":" }
-			else if(sender.tag == 7 ){ currentLetter = ";" }
-			else if(sender.tag == 8 ){ currentLetter = "@" }
-			else if(sender.tag == 9 ){ currentLetter = "#" }
+			else if(sender.tag == 6 ){ currentLetter = "@" }
+			else if(sender.tag == 7 ){ currentLetter = "+" }
+			else if(sender.tag == 8 ){ currentLetter = "/" }
+			else if(sender.tag == 9 ){ currentLetter = "!" }
 				
 			else if(sender.tag == 10 ){ currentLetter = dataSetOrdered(currentLetter)[10] }
 			else if(sender.tag == 11 ){ currentLetter = dataSetOrdered(currentLetter)[11]}
@@ -298,7 +299,13 @@ class KeyboardViewController: UIInputViewController
 		}
 		
 		if(sender.tag == 28 && isAltKeyboard == 0 ){
-			isAltKeyboard = 1
+			if( isKeyHeld == 1 ){
+				isKeyHeld = 0
+				isAltKeyboard = 2
+			}
+			else{
+				isAltKeyboard = 1
+			}
 			templateUpdate()
 		}
 		else{
@@ -399,9 +406,14 @@ class KeyboardViewController: UIInputViewController
 		// ALT
 		
 		if( isAltKeyboard == 1 ){
-			segment1 = ["apostrophe","comma","period","dash"]
-			segment2 = ["parenthesisleft","parenthesisright","colon","semicolon","atsign","hash"]
+			segment1 = ["apostrophe","colon","period","minus"]
+			segment2 = ["parenthesisleft","parenthesisright","atsign","plus","dash","exclamation"]
 			segment3 = segment4
+		}
+		if( isAltKeyboard == 2 ){
+			segment1 = ["0","1","2","3"]
+			segment2 = ["4","5","6","7","8","9"]
+			segment3 = [""]
 		}
 		
 		return segment1 + segment2 + segment3
