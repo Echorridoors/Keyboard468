@@ -42,6 +42,9 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="testInput:" destination="BYZ-38-t0r" eventType="editingChanged" id="ZUE-hk-u5l"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.068121693121693139" green="0.068121693121693139" blue="0.068121693121693139" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,6 +52,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="tutorialInput" destination="kFr-ea-osV" id="pWU-li-1B9"/>
+                        <outlet property="tutorialLabel" destination="VEV-g6-VoC" id="EMi-G4-yhf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

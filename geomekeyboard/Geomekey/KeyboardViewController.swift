@@ -170,6 +170,13 @@ class KeyboardViewController: UIInputViewController
 						
 					}
 				}
+				else if( button.tag == 28 ){ button.frame = keyboardKeyLayouts(28) }
+				else if( button.tag == 29 ){ button.frame = keyboardKeyLayouts(29) }
+				else if( button.tag == 30 ){ button.frame = keyboardKeyLayouts(30) }
+				else if( button.tag == 31 ){ button.frame = keyboardKeyLayouts(31) }
+				else if( button.tag == 32 ){ button.frame = keyboardKeyLayouts(32) }
+				
+
 			}
 			
 		}
@@ -465,6 +472,8 @@ class KeyboardViewController: UIInputViewController
 		var letterHeight = vh/3
 		var marginTop:CGFloat = 0
 		
+		let firstRowLetterHeight = letterHeight
+		
 		buttonFrame = CGRectMake(0, 0, 0, 0)
 		
 		if order == 0 { buttonFrame = CGRectMake(letterWidth*0, 0, letterWidth, letterHeight) }
@@ -475,6 +484,8 @@ class KeyboardViewController: UIInputViewController
 		marginTop = marginTop + letterHeight
 		letterWidth = vw/6
 		letterHeight = vh/4
+		
+		let secondRowLetterHeight = letterHeight
 		
 		if order == 4 { buttonFrame = CGRectMake(letterWidth*0, marginTop, letterWidth, letterHeight) }
 		if order == 5 { buttonFrame = CGRectMake(letterWidth*1, marginTop, letterWidth, letterHeight) }
@@ -487,6 +498,8 @@ class KeyboardViewController: UIInputViewController
 		letterWidth = vw/8
 		letterHeight = vh/6
 		
+		let thirdRowLetterHeight = letterHeight
+		
 		if order == 10 { buttonFrame = CGRectMake(letterWidth*0, marginTop, letterWidth, letterHeight) }
 		if order == 11 { buttonFrame = CGRectMake(letterWidth*1, marginTop, letterWidth, letterHeight) }
 		if order == 12 { buttonFrame = CGRectMake(letterWidth*2, marginTop, letterWidth, letterHeight) }
@@ -496,9 +509,9 @@ class KeyboardViewController: UIInputViewController
 		if order == 16 { buttonFrame = CGRectMake(letterWidth*6, marginTop, letterWidth, letterHeight) }
 		if order == 17 { buttonFrame = CGRectMake(letterWidth*7, marginTop, letterWidth, letterHeight) }
 		
-		marginTop = (vh/3) + (vh/4) + (vh/6)
+		marginTop = (firstRowLetterHeight + secondRowLetterHeight + thirdRowLetterHeight)
 		letterWidth = vw/8
-		letterHeight = 54
+		letterHeight = vh-(firstRowLetterHeight + secondRowLetterHeight + thirdRowLetterHeight)
 		
 		if order == 28 { buttonFrame = CGRectMake(letterWidth*0, marginTop, letterWidth, letterHeight) } // skip
 		if order == 29 { buttonFrame = CGRectMake(letterWidth*2, marginTop, letterWidth*4, letterHeight) } // space
