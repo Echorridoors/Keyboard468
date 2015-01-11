@@ -305,7 +305,7 @@ class KeyboardViewController: UIInputViewController
 			else if(sender.tag == 17 ){ currentLetter = dataSetOrdered(currentLetter)[17] }
 
 			textInject(currentLetter)
-			currentLetter = ""
+			// currentLetter = ""
 		}
 		// Letter Mods
 		else if(sender.tag == 29 ){
@@ -332,6 +332,9 @@ class KeyboardViewController: UIInputViewController
 			textInject(currentLetter)
 			currentLetter = currentLetter.lowercaseString
 		}
+		
+		NSLog("Button Tag: %d Current letter: %@",sender.tag,currentLetter)
+		
 		
 		if( currentIndex < 17 ){
 			currentIndex = sender.tag
@@ -467,7 +470,18 @@ class KeyboardViewController: UIInputViewController
 		
 		var returnArray = segment1 + segment2 + segment3
 		
-		if( currentLetter != "" && currentIndex != nil && find(returnArray, currentLetter) != nil && currentIndex != nil && returnArray.count > currentIndex ){
+		if( currentLetter != "" ){
+		
+			NSLog("? %@", returnArray )
+
+		}
+		
+//		var currentLetterIndex = find(returnArray, currentLetter)!
+		
+		if( find(returnArray, currentLetter) != nil && currentIndex != nil && returnArray.count > currentIndex ){
+			
+			println("sticky")
+			
 			var index = find(returnArray, currentLetter)
 			returnArray.removeAtIndex(index!)
 			returnArray.insert(currentLetter, atIndex: currentIndex! )
@@ -480,6 +494,8 @@ class KeyboardViewController: UIInputViewController
 	{
 		var dataList = [""]
 		
+		let letterFreq = ["e","t","a","o","i","n","s","h","r","d","l","c","u","m","w","f","g","y","p","b","v","k","j","x","q","z"]
+
 		if target == "a" { dataList = ["n","l","t","r","c","s","b","m","p","d","g","e","u","i","v","k","f","y","w","z","h","x","o","q","j","a"] }
 		else if target == "b" { dataList = ["l","e","a","i","r","o","u","b","s","y","c","d","t","m","p","h","j","f","v","g","n","w","k","q","z"] }
 		else if target == "c" { dataList = ["o","a","h","e","i","r","t","u","l","k","y","c","s","n","q","z","m","d","w","p","b","f"] }
@@ -507,6 +523,14 @@ class KeyboardViewController: UIInputViewController
 		else if target == "y" { dataList = ["l","s","t","a","c","p","m","o","n","e","r","i","g","d","w","b","h","u","f","z","x","k","q","y","v"] }
 		else if target == "z" { dataList = ["e","a","o","i","y","z","u","l","w","d","r","m","c","h","k","s","n","g","t","p","b","f","v"] }
 		else { dataList = ["e","t","a","o","i","n","s","h","r","d","l","c","u","m","w","f","g","y","p","b","v","k","j","x","q","z"] }
+		
+		// Add missing letters
+
+		for (index,element) in enumerate(letterFreq) {
+			if(( find(dataList,element) ) == nil){
+				dataList.append(element) 
+			}
+		}
 		
 		return dataList
 	}
