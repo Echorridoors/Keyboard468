@@ -11,6 +11,7 @@ import UIKit
 
 var currentLetter:String = ""
 var currentIndex:Int?
+var debugDataSetAccess:Int = 0
 
 class KeyboardViewController: UIInputViewController
 {
@@ -27,20 +28,6 @@ class KeyboardViewController: UIInputViewController
         super.updateViewConstraints()
         // Add custom view sizing constraints here
     }
-	
-	override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
-	{
-		let touchesFix = touches.anyObject() as UITouch
-		var newPoint = touchesFix.locationInView(self.wrapper)
-	}
-	
-	override func touchesMoved(touches: NSSet, withEvent event: UIEvent)
-	{
-	}
-	
-	override func touchesEnded(touches: NSSet, withEvent event: UIEvent)
-	{
-	}
 	
 	func textInject( character:String)
 	{
@@ -280,6 +267,8 @@ class KeyboardViewController: UIInputViewController
 		keyTimer?.invalidate()
 		keyRepeatTimer?.invalidate()
 		
+		let currentDataSetOrdered = dataSetOrdered(currentLetter)
+		
 		if( isAltKeyboard == 1 )
 		{
 			if(sender.tag == 0 ){ currentLetter = "'" }
@@ -294,14 +283,14 @@ class KeyboardViewController: UIInputViewController
 			else if(sender.tag == 8 ){ currentLetter = "/" }
 			else if(sender.tag == 9 ){ currentLetter = "!" }
 				
-			else if(sender.tag == 10 ){ currentLetter = dataSetOrdered(currentLetter)[10] }
-			else if(sender.tag == 11 ){ currentLetter = dataSetOrdered(currentLetter)[11] }
-			else if(sender.tag == 12 ){ currentLetter = dataSetOrdered(currentLetter)[12] }
-			else if(sender.tag == 13 ){ currentLetter = dataSetOrdered(currentLetter)[13] }
-			else if(sender.tag == 14 ){ currentLetter = dataSetOrdered(currentLetter)[14] }
-			else if(sender.tag == 15 ){ currentLetter = dataSetOrdered(currentLetter)[15] }
-			else if(sender.tag == 16 ){ currentLetter = dataSetOrdered(currentLetter)[16] }
-			else if(sender.tag == 17 ){ currentLetter = dataSetOrdered(currentLetter)[17] }
+			else if(sender.tag == 10 ){ currentLetter = currentDataSetOrdered[10] }
+			else if(sender.tag == 11 ){ currentLetter = currentDataSetOrdered[11] }
+			else if(sender.tag == 12 ){ currentLetter = currentDataSetOrdered[12] }
+			else if(sender.tag == 13 ){ currentLetter = currentDataSetOrdered[13] }
+			else if(sender.tag == 14 ){ currentLetter = currentDataSetOrdered[14] }
+			else if(sender.tag == 15 ){ currentLetter = currentDataSetOrdered[15] }
+			else if(sender.tag == 16 ){ currentLetter = currentDataSetOrdered[16] }
+			else if(sender.tag == 17 ){ currentLetter = currentDataSetOrdered[17] }
 
 			textInject(currentLetter)
 			// currentLetter = ""
@@ -327,7 +316,7 @@ class KeyboardViewController: UIInputViewController
 			textInject(currentLetter)
 		}
 		else{
-			currentLetter = dataSetOrdered(currentLetter)[sender.tag].lowercaseString
+			currentLetter = currentDataSetOrdered[sender.tag].lowercaseString
 			textInject(currentLetter)
 			currentLetter = currentLetter.lowercaseString
 		}
@@ -398,22 +387,23 @@ class KeyboardViewController: UIInputViewController
 	func dataSetOrdered(target:String) -> Array<String>
 	{
 		var segment1:[String] = []
+		let dataSetTarget = dataSet(target)
 
-		if(dataSet(target).count > 0 ){ segment1.append(dataSet(target)[0]) }
-		if(dataSet(target).count > 1 ){ segment1.append(dataSet(target)[1]) }
-		if(dataSet(target).count > 2 ){ segment1.append(dataSet(target)[2]) }
-		if(dataSet(target).count > 3 ){ segment1.append(dataSet(target)[3]) }
+		if(dataSetTarget.count > 0 ){ segment1.append(dataSetTarget[0]) }
+		if(dataSetTarget.count > 1 ){ segment1.append(dataSetTarget[1]) }
+		if(dataSetTarget.count > 2 ){ segment1.append(dataSetTarget[2]) }
+		if(dataSetTarget.count > 3 ){ segment1.append(dataSetTarget[3]) }
 		
 		segment1 = segment1.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
 
 		var segment2:[String] = []
 
-		if(dataSet(target).count > 4 ){ segment2.append(dataSet(target)[4]) }
-		if(dataSet(target).count > 5 ){ segment2.append(dataSet(target)[5]) }
-		if(dataSet(target).count > 6 ){ segment2.append(dataSet(target)[6]) }
-		if(dataSet(target).count > 7 ){ segment2.append(dataSet(target)[7]) }
-		if(dataSet(target).count > 8 ){ segment2.append(dataSet(target)[8]) }
-		if(dataSet(target).count > 9 ){ segment2.append(dataSet(target)[9]) }
+		if(dataSetTarget.count > 4 ){ segment2.append(dataSetTarget[4]) }
+		if(dataSetTarget.count > 5 ){ segment2.append(dataSetTarget[5]) }
+		if(dataSetTarget.count > 6 ){ segment2.append(dataSetTarget[6]) }
+		if(dataSetTarget.count > 7 ){ segment2.append(dataSetTarget[7]) }
+		if(dataSetTarget.count > 8 ){ segment2.append(dataSetTarget[8]) }
+		if(dataSetTarget.count > 9 ){ segment2.append(dataSetTarget[9]) }
 		
 		// Preserve Current Letter
 		
@@ -421,27 +411,27 @@ class KeyboardViewController: UIInputViewController
 
 		var segment3:[String] = []
 
-		if(dataSet(target).count > 10 ){ segment3.append(dataSet(target)[10]) }
-		if(dataSet(target).count > 11 ){ segment3.append(dataSet(target)[11]) }
-		if(dataSet(target).count > 12 ){ segment3.append(dataSet(target)[12]) }
-		if(dataSet(target).count > 13 ){ segment3.append(dataSet(target)[13]) }
-		if(dataSet(target).count > 14 ){ segment3.append(dataSet(target)[14]) }
-		if(dataSet(target).count > 15 ){ segment3.append(dataSet(target)[15]) }
-		if(dataSet(target).count > 16 ){ segment3.append(dataSet(target)[16]) }
-		if(dataSet(target).count > 17 ){ segment3.append(dataSet(target)[17]) }
+		if(dataSetTarget.count > 10 ){ segment2.append(dataSetTarget[10]) }
+		if(dataSetTarget.count > 11 ){ segment2.append(dataSetTarget[11]) }
+		if(dataSetTarget.count > 12 ){ segment2.append(dataSetTarget[12]) }
+		if(dataSetTarget.count > 13 ){ segment2.append(dataSetTarget[13]) }
+		if(dataSetTarget.count > 14 ){ segment2.append(dataSetTarget[14]) }
+		if(dataSetTarget.count > 15 ){ segment2.append(dataSetTarget[15]) }
+		if(dataSetTarget.count > 16 ){ segment2.append(dataSetTarget[16]) }
+		if(dataSetTarget.count > 17 ){ segment2.append(dataSetTarget[17]) }
 		
 		segment3 = segment3.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
 
 		var segment4:[String] = []
 
-		if(dataSet(target).count > 18 ){ segment4.append(dataSet(target)[18]) }
-		if(dataSet(target).count > 19 ){ segment4.append(dataSet(target)[19]) }
-		if(dataSet(target).count > 20 ){ segment4.append(dataSet(target)[20]) }
-		if(dataSet(target).count > 21 ){ segment4.append(dataSet(target)[21]) }
-		if(dataSet(target).count > 22 ){ segment4.append(dataSet(target)[22]) }
-		if(dataSet(target).count > 23 ){ segment4.append(dataSet(target)[23]) }
-		if(dataSet(target).count > 24 ){ segment4.append(dataSet(target)[24]) }
-		if(dataSet(target).count > 25 ){ segment4.append(dataSet(target)[25]) }
+		if(dataSetTarget.count > 18 ){ segment2.append(dataSetTarget[18]) }
+		if(dataSetTarget.count > 19 ){ segment2.append(dataSetTarget[19]) }
+		if(dataSetTarget.count > 20 ){ segment2.append(dataSetTarget[20]) }
+		if(dataSetTarget.count > 21 ){ segment2.append(dataSetTarget[21]) }
+		if(dataSetTarget.count > 22 ){ segment2.append(dataSetTarget[22]) }
+		if(dataSetTarget.count > 23 ){ segment2.append(dataSetTarget[23]) }
+		if(dataSetTarget.count > 24 ){ segment2.append(dataSetTarget[24]) }
+		if(dataSetTarget.count > 25 ){ segment2.append(dataSetTarget[25]) }
 		
 		segment4 = segment4.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
 
@@ -477,6 +467,9 @@ class KeyboardViewController: UIInputViewController
 	
 	func dataSet(target:String) -> Array<String>
 	{
+		debugDataSetAccess += 1
+		println("access dataset \(debugDataSetAccess)")
+		
 		var dataList = [""]
 		
 		let letterFreq = ["e","t","a","o","i","n","s","h","r","d","l","c","u","m","w","f","g","y","p","b","v","k","j","x","q","z"]
