@@ -1,3 +1,4 @@
+
 //
 //  KeyboardViewController.swift
 //  Geomekey
@@ -9,6 +10,7 @@
 import UIKit
 
 var currentLetter:String = ""
+var currentIndex:Int?
 
 class KeyboardViewController: UIInputViewController
 {
@@ -144,30 +146,25 @@ class KeyboardViewController: UIInputViewController
 	func templateUpdate()
 	{
 		var targetLayout:Array = dataSetOrdered(currentLetter)
-		
+
 		for subview in view.subviews as [UIView] {
 			
 			if ( subview is UIButton ) {
+				
 				var button = subview as UIButton
-				
 				var currentLetterId:Int = Int(subview.tag)
-				
-				if( currentLetterId < targetLayout.count ){
-					
+				if( currentLetterId < targetLayout.count )
+				{
 					var currentLetterString = targetLayout[currentLetterId]
-					
 					button.frame = keyboardKeyLayouts(currentLetterId)
-					
 					if let image  = UIImage(named: "char.\(currentLetterString)") {
 						button.setImage(image, forState: UIControlState.Normal)
-						
 						if( currentLetter == currentLetterString ){
 							button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
 						}
 						else{
 							button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
 						}
-						
 					}
 				}
 				else if( button.tag == 28 ){ button.frame = keyboardKeyLayouts(28) }
@@ -175,10 +172,40 @@ class KeyboardViewController: UIInputViewController
 				else if( button.tag == 30 ){ button.frame = keyboardKeyLayouts(30) }
 				else if( button.tag == 31 ){ button.frame = keyboardKeyLayouts(31) }
 				else if( button.tag == 32 ){ button.frame = keyboardKeyLayouts(32) }
-				
-
 			}
 			
+		}
+	}
+	
+	func templateHighlight( sender:UIButton)
+	{
+		let touchPoint = CGPointMake(sender.frame.origin.x + (sender.frame.width/2), sender.frame.origin.y + (sender.frame.height/2))
+		
+		for subview in view.subviews as [UIView] {
+			
+			if ( subview is UIButton ) {
+				
+				let button = subview as UIButton
+				
+				let buttonPoint = CGPointMake(button.frame.origin.x + (button.frame.width/2), button.frame.origin.y + (button.frame.height/2))
+				
+				let diffx = Float(touchPoint.x - buttonPoint.x)
+				let diffy = Float(touchPoint.y - buttonPoint.y)
+				let distance = hypotf(diffx, diffy)
+				
+				var intensity:CGFloat = (300 - CGFloat(distance)) / 300
+				
+				if( intensity > 0.5 ){
+					intensity = 0.5
+				}
+				if( intensity < 0.2 ){
+					intensity = 0.2
+				}
+				if( distance == 0 ){
+					intensity = 1.0
+				}
+				button.layer.borderColor = UIColor(white: (intensity+0.5)*intensity, alpha: 1).CGColor
+			}
 		}
 	}
 	
@@ -269,14 +296,14 @@ class KeyboardViewController: UIInputViewController
 			else if(sender.tag == 9 ){ currentLetter = "!" }
 				
 			else if(sender.tag == 10 ){ currentLetter = dataSetOrdered(currentLetter)[10] }
-			else if(sender.tag == 11 ){ currentLetter = dataSetOrdered(currentLetter)[11]}
+			else if(sender.tag == 11 ){ currentLetter = dataSetOrdered(currentLetter)[11] }
 			else if(sender.tag == 12 ){ currentLetter = dataSetOrdered(currentLetter)[12] }
 			else if(sender.tag == 13 ){ currentLetter = dataSetOrdered(currentLetter)[13] }
 			else if(sender.tag == 14 ){ currentLetter = dataSetOrdered(currentLetter)[14] }
 			else if(sender.tag == 15 ){ currentLetter = dataSetOrdered(currentLetter)[15] }
 			else if(sender.tag == 16 ){ currentLetter = dataSetOrdered(currentLetter)[16] }
 			else if(sender.tag == 17 ){ currentLetter = dataSetOrdered(currentLetter)[17] }
-			
+
 			textInject(currentLetter)
 			currentLetter = ""
 		}
@@ -306,6 +333,14 @@ class KeyboardViewController: UIInputViewController
 			currentLetter = currentLetter.lowercaseString
 		}
 		
+		if( currentIndex < 17 ){
+			currentIndex = sender.tag
+		}
+		else{
+			currentIndex = nil
+		}
+		
+		
 		if(sender.tag == 28 && isAltKeyboard == 0 ){
 			if( isKeyHeld == 1 ){
 				isKeyHeld = 0
@@ -326,6 +361,7 @@ class KeyboardViewController: UIInputViewController
 		
 		sender.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
 		sender.frame = self.keyboardKeyLayouts(sender.tag)
+		templateHighlight(sender)
 		
 	}
 	
@@ -386,6 +422,8 @@ class KeyboardViewController: UIInputViewController
 		if(dataSet(target).count > 8 ){ segment2.append(dataSet(target)[8]) }
 		if(dataSet(target).count > 9 ){ segment2.append(dataSet(target)[9]) }
 		
+		// Preserve Current Letter
+		
 		segment2 = segment2.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
 
 		var segment3:[String] = []
@@ -427,40 +465,52 @@ class KeyboardViewController: UIInputViewController
 			segment3 = segment4
 		}
 		
-		return segment1 + segment2 + segment3
+		var returnArray = segment1 + segment2 + segment3
+		
+		if( currentLetter != "" && currentIndex != nil && find(returnArray, currentLetter) != nil && currentIndex != nil && returnArray.count > currentIndex ){
+			var index = find(returnArray, currentLetter)
+			returnArray.removeAtIndex(index!)
+			returnArray.insert(currentLetter, atIndex: currentIndex! )
+		}
+		
+		return returnArray
 	}
 	
 	func dataSet(target:String) -> Array<String>
 	{
-		if target == "a" { return ["n","l","t","r","c","s","b","m","p","d","g","e","u","i","v","k","f","y","w","z","h","x","o","q","j","a"] }
-		else if target == "b" { return ["l","e","a","i","r","o","u","b","s","y","c","d","t","m","p","h","j","f","v","g","n","w","k","q","z"] }
-		else if target == "c" { return ["o","a","h","e","i","r","t","u","l","k","y","c","s","n","q","z","m","d","w","p","b","f"] }
-		else if target == "d" { return ["e","i","o","a","r","u","l","y","d","n","g","s","m","w","h","f","b","v","t","j","p","c","k","z","q"] }
-		else if target == "e" { return ["r","n","s","d","l","t","a","c","m","p","x","e","o","u","i","v","f","g","b","w","y","q","h","k","z","j"] }
-		else if target == "f" { return ["o","i","e","l","u","a","r","f","t","y","s","n","w","h","m","d","c","b","g","j","p","k","v"] }
-		else if target == "g" { return ["e","a","r","i","l","o","u","n","y","h","g","m","s","w","t","b","f","d","p","z","k","c","v","j"] }
-		else if target == "h" { return ["e","o","i","a","y","u","r","t","l","n","m","w","b","f","s","p","h","c","d","g","k","v","q","z"] }
-		else if target == "i" { return ["n","c","s","t","o","a","d","l","m","z","v","f","p","r","g","e","b","k","u","i","x","q","h","j","w","y"] }
-		else if target == "j" { return ["u","a","o","e","i","r","h","y","n","d","l","m","p","b","t"] }
-		else if target == "k" { return ["e","i","a","o","l","n","u","y","h","s","r","w","b","t","f","k","m","d","p","j","c","g","v","z"] }
-		else if target == "l" { return ["e","i","a","y","l","o","u","t","d","p","m","v","c","s","n","f","k","g","b","w","h","r","z","x","j","q"] }
-		else if target == "m" { return ["a","e","i","o","p","u","y","b","m","n","s","l","f","r","d","w","c","t","h","v","k","g","j","z","q"] }
-		else if target == "n" { return ["e","t","o","i","g","a","d","c","s","n","u","y","f","k","v","l","p","r","m","z","h","b","j","w","q","x"] }
-		else if target == "o" { return ["n","r","u","p","s","m","l","t","c","g","v","d","i","o","b","w","a","f","e","x","k","h","y","z","q","j"] }
-		else if target == "p" { return ["r","e","h","a","o","i","l","t","u","s","y","p","n","m","w","f","b","c","k","g","d","j","v","q"] }
-		else if target == "q" { return ["u","e","o","a","r","q","i"] }
-		else if target == "r" { return ["e","a","i","o","t","y","m","s","c","d","r","u","n","p","b","g","h","l","v","k","f","w","j","q","z","x"] }
-		else if target == "s" { return ["t","s","e","i","u","c","h","p","a","o","m","l","y","n","k","w","q","f","b","r","g","d","v","j","z"] }
-		else if target == "t" { return ["e","i","r","a","o","h","y","u","t","l","c","w","s","m","f","n","b","p","g","z","d","k","v","j","q"] }
-		else if target == "u" { return ["n","s","l","r","m","t","c","i","a","p","e","d","g","b","o","f","v","k","x","z","y","j","h","q","u","w"] }
-		else if target == "v" { return ["e","i","a","o","u","y","r","v","l","s","c","k","n","g"] }
-		else if target == "w" { return ["a","i","o","e","h","r","n","l","s","d","k","y","b","t","u","m","f","w","p","c","g","q","v","z"] }
-		else if target == "x" { return ["i","a","e","y","o","t","u","c","p","l","b","h","w","f","m","s","d","g","n","q","r","k"] }
-		else if target == "y" { return ["l","s","t","a","c","p","m","o","n","e","r","i","g","d","w","b","h","u","f","z","x","k","q","y","v"] }
-		else if target == "z" { return ["e","a","o","i","y","z","u","l","w","d","r","m","c","h","k","s","n","g","t","p","b","f","v"] }
-		else { return ["e","t","a","o","i","n","s","h","r","d","l","c","u","m","w","f","g","y","p","b","v","k","j","x","q","z"] }
-
+		var dataList = [""]
+		
+		if target == "a" { dataList = ["n","l","t","r","c","s","b","m","p","d","g","e","u","i","v","k","f","y","w","z","h","x","o","q","j","a"] }
+		else if target == "b" { dataList = ["l","e","a","i","r","o","u","b","s","y","c","d","t","m","p","h","j","f","v","g","n","w","k","q","z"] }
+		else if target == "c" { dataList = ["o","a","h","e","i","r","t","u","l","k","y","c","s","n","q","z","m","d","w","p","b","f"] }
+		else if target == "d" { dataList = ["e","i","o","a","r","u","l","y","d","n","g","s","m","w","h","f","b","v","t","j","p","c","k","z","q"] }
+		else if target == "e" { dataList = ["r","n","s","d","l","t","a","c","m","p","x","e","o","u","i","v","f","g","b","w","y","q","h","k","z","j"] }
+		else if target == "f" { dataList = ["o","i","e","l","u","a","r","f","t","y","s","n","w","h","m","d","c","b","g","j","p","k","v"] }
+		else if target == "g" { dataList = ["e","a","r","i","l","o","u","n","y","h","g","m","s","w","t","b","f","d","p","z","k","c","v","j"] }
+		else if target == "h" { dataList = ["e","o","i","a","y","u","r","t","l","n","m","w","b","f","s","p","h","c","d","g","k","v","q","z"] }
+		else if target == "i" { dataList = ["n","c","s","t","o","a","d","l","m","z","v","f","p","r","g","e","b","k","u","i","x","q","h","j","w","y"] }
+		else if target == "j" { dataList = ["u","a","o","e","i","r","h","y","n","d","l","m","p","b","t"] }
+		else if target == "k" { dataList = ["e","i","a","o","l","n","u","y","h","s","r","w","b","t","f","k","m","d","p","j","c","g","v","z"] }
+		else if target == "l" { dataList = ["e","i","a","y","l","o","u","t","d","p","m","v","c","s","n","f","k","g","b","w","h","r","z","x","j","q"] }
+		else if target == "m" { dataList = ["a","e","i","o","p","u","y","b","m","n","s","l","f","r","d","w","c","t","h","v","k","g","j","z","q"] }
+		else if target == "n" { dataList = ["e","t","o","i","g","a","d","c","s","n","u","y","f","k","v","l","p","r","m","z","h","b","j","w","q","x"] }
+		else if target == "o" { dataList = ["n","r","u","p","s","m","l","t","c","g","v","d","i","o","b","w","a","f","e","x","k","h","y","z","q","j"] }
+		else if target == "p" { dataList = ["r","e","h","a","o","i","l","t","u","s","y","p","n","m","w","f","b","c","k","g","d","j","v","q"] }
+		else if target == "q" { dataList = ["u","e","o","a","r","q","i"] }
+		else if target == "r" { dataList = ["e","a","i","o","t","y","m","s","c","d","r","u","n","p","b","g","h","l","v","k","f","w","j","q","z","x"] }
+		else if target == "s" { dataList = ["t","s","e","i","u","c","h","p","a","o","m","l","y","n","k","w","q","f","b","r","g","d","v","j","z"] }
+		else if target == "t" { dataList = ["e","i","r","a","o","h","y","u","t","l","c","w","s","m","f","n","b","p","g","z","d","k","v","j","q"] }
+		else if target == "u" { dataList = ["n","s","l","r","m","t","c","i","a","p","e","d","g","b","o","f","v","k","x","z","y","j","h","q","u","w"] }
+		else if target == "v" { dataList = ["e","i","a","o","u","y","r","v","l","s","c","k","n","g"] }
+		else if target == "w" { dataList = ["a","i","o","e","h","r","n","l","s","d","k","y","b","t","u","m","f","w","p","c","g","q","v","z"] }
+		else if target == "x" { dataList = ["i","a","e","y","o","t","u","c","p","l","b","h","w","f","m","s","d","g","n","q","r","k"] }
+		else if target == "y" { dataList = ["l","s","t","a","c","p","m","o","n","e","r","i","g","d","w","b","h","u","f","z","x","k","q","y","v"] }
+		else if target == "z" { dataList = ["e","a","o","i","y","z","u","l","w","d","r","m","c","h","k","s","n","g","t","p","b","f","v"] }
+		else { dataList = ["e","t","a","o","i","n","s","h","r","d","l","c","u","m","w","f","g","y","p","b","v","k","j","x","q","z"] }
+		
+		return dataList
 	}
+
 	func keyboardKeyLayouts(order:Int) -> CGRect
 	{
 		let vh = self.view!.frame.height
