@@ -128,7 +128,7 @@ class KeyboardViewController: UIInputViewController
 
 		// Animate In
 		var count = 0
-		for subview in view.subviews as [UIView]   {
+		for subview in view.subviews as [UIView] {
 			
 			let destination:CGRect = subview.frame
 			let offsetDistance:CGFloat = 40 * CGFloat(count)
@@ -138,7 +138,6 @@ class KeyboardViewController: UIInputViewController
 				subview.frame = destination
 			}, completion: { finished in
 			})
-
 			count += 1
 		}
 	}
@@ -332,17 +331,8 @@ class KeyboardViewController: UIInputViewController
 			textInject(currentLetter)
 			currentLetter = currentLetter.lowercaseString
 		}
-		
-		NSLog("Button Tag: %d Current letter: %@",sender.tag,currentLetter)
-		
-		
-		if( currentIndex < 17 ){
-			currentIndex = sender.tag
-		}
-		else{
-			currentIndex = nil
-		}
-		
+
+		currentIndex = sender.tag
 		
 		if(sender.tag == 28 && isAltKeyboard == 0 ){
 			if( isKeyHeld == 1 ){
@@ -470,20 +460,15 @@ class KeyboardViewController: UIInputViewController
 		
 		var returnArray = segment1 + segment2 + segment3
 		
-		if( currentLetter != "" ){
-		
-			NSLog("? %@", returnArray )
+		if( currentLetter != "" && isAltKeyboard == 0 && currentIndex < 18 && currentIndex != nil){
+			
+			// If the letter already exists in the array, remove to avoid duplicates
 
-		}
-		
-//		var currentLetterIndex = find(returnArray, currentLetter)!
-		
-		if( find(returnArray, currentLetter) != nil && currentIndex != nil && returnArray.count > currentIndex ){
+			if( find(returnArray,currentLetter) != nil ){
+				returnArray.removeAtIndex( find(returnArray,currentLetter)! )
+			}
 			
-			println("sticky")
-			
-			var index = find(returnArray, currentLetter)
-			returnArray.removeAtIndex(index!)
+			// Add letter at current position
 			returnArray.insert(currentLetter, atIndex: currentIndex! )
 		}
 		
