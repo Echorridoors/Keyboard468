@@ -446,8 +446,8 @@
 			projectRoot = "";
 			targets = (
 				03E19BDD1A4DF3AA0022643E /* geomekeyboard */,
-				03E19BF21A4DF3AA0022643E /* geomekeyboardTests */,
 				03E19C061A4DF45C0022643E /* Geomekey */,
+				03E19BF21A4DF3AA0022643E /* geomekeyboardTests */,
 			);
 		};
 /* End PBXProject section */
