@@ -303,6 +303,7 @@ class KeyboardViewController: UIInputViewController
 		}
 		else if(sender.tag == 28 ){
 			// ALT, input nothing
+            currentLetter = ""
 		}
 		else if(sender.tag == 31 ){
 			advanceToNextInputMode()
@@ -333,8 +334,10 @@ class KeyboardViewController: UIInputViewController
 			}
 			templateUpdate()
 		}
-		else if( isAltKeyboard == 2 && sender.tag != 28){
-			
+		else if( isAltKeyboard == 2 && sender.tag != 28)
+        {
+            isAltKeyboard = 0
+            templateUpdate()
 		}
 		else{
 			isAltKeyboard = 0
@@ -434,22 +437,63 @@ class KeyboardViewController: UIInputViewController
 		if(dataSetTarget.count > 25 ){ segment2.append(dataSetTarget[25]) }
 		
 		segment4 = segment4.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
-
+        
+        NSLog("SEG1 %@",segment1)
+        NSLog("SEG2 %@",segment2)
+        NSLog("SEG3 %@",segment3)
+        NSLog("SEG4 %@",segment4)
+        
+        var returnArray = segment1 + segment2 + segment3 + segment4
+        
 		// ALT
 		
-		if( isAltKeyboard == 1 ){
-			segment1 = ["apostrophe","colon","period","minus"]
-			segment2 = ["parenthesisleft","parenthesisright","atsign","plus","dash","exclamation"]
-			segment3 = segment4
+        if( isAltKeyboard == 1 ){
+            returnArray[0] = "apostrophe"
+            returnArray[1] = "colon"
+            returnArray[2] = "period"
+            returnArray[3] = "minus"
+            
+            returnArray[4] = "parenthesisleft"
+            returnArray[5] = "parenthesisright"
+            returnArray[6] = "atsign"
+            returnArray[7] = "plus"
+            returnArray[8] = "dash"
+            returnArray[9] = "exclamation"
+            
+//            returnArray.removeAtIndex(10)
+//            returnArray.removeAtIndex(11)
+//            returnArray.removeAtIndex(12)
+//            returnArray.removeAtIndex(13)
+//            returnArray.removeAtIndex(14)
+//            returnArray.removeAtIndex(15)
+//            returnArray.removeAtIndex(16)
+//            returnArray.removeAtIndex(17)
+            
+            
+            returnArray[9] = returnArray[18]
+            returnArray[10] = returnArray[19]
+            returnArray[11] = returnArray[20]
+            returnArray[12] = returnArray[21]
+            returnArray[13] = returnArray[22]
+            returnArray[14] = returnArray[23]
+            returnArray[15] = returnArray[24]
+            returnArray[16] = returnArray[25]
 		}
 		if( isAltKeyboard == 2 ){
-			segment1 = ["0","1","2","3"]
-			segment2 = ["4","5","6","7","8","9"]
-			segment3 = segment4
-		}
-		
-		var returnArray = segment1 + segment2 + segment3
-		
+            
+            returnArray[0] = "0"
+            returnArray[1] = "1"
+            returnArray[2] = "2"
+            returnArray[3] = "3"
+            
+            returnArray[4] = "4"
+            returnArray[5] = "5"
+            returnArray[6] = "6"
+            returnArray[7] = "7"
+            returnArray[8] = "8"
+            returnArray[9] = "9"
+        }
+        
 		if( currentLetter != "" && isAltKeyboard == 0 && currentIndex < 18 && currentIndex != nil){
 			
 			// If the letter already exists in the array, remove to avoid duplicates
@@ -461,7 +505,8 @@ class KeyboardViewController: UIInputViewController
 			// Add letter at current position
 			returnArray.insert(currentLetter, atIndex: currentIndex! )
 		}
-		
+        
+        
 		return returnArray
 	}
 	
