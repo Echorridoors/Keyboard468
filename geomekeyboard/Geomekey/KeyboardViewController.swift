@@ -142,6 +142,8 @@ class KeyboardViewController: UIInputViewController
 				if( currentLetterId < targetLayout.count )
 				{
 					var currentLetterString = targetLayout[currentLetterId]
+                    NSLog("> %@",currentLetterString)
+                    
 					button.frame = keyboardKeyLayouts(currentLetterId)
 					if let image  = UIImage(named: "char.\(currentLetterString)") {
 						button.setImage(image, forState: UIControlState.Normal)
@@ -460,24 +462,14 @@ class KeyboardViewController: UIInputViewController
             returnArray[8] = "dash"
             returnArray[9] = "exclamation"
             
-//            returnArray.removeAtIndex(10)
-//            returnArray.removeAtIndex(11)
-//            returnArray.removeAtIndex(12)
-//            returnArray.removeAtIndex(13)
-//            returnArray.removeAtIndex(14)
-//            returnArray.removeAtIndex(15)
-//            returnArray.removeAtIndex(16)
-//            returnArray.removeAtIndex(17)
-            
-            
-            returnArray[9] = returnArray[18]
-            returnArray[10] = returnArray[19]
-            returnArray[11] = returnArray[20]
-            returnArray[12] = returnArray[21]
-            returnArray[13] = returnArray[22]
-            returnArray[14] = returnArray[23]
-            returnArray[15] = returnArray[24]
-            returnArray[16] = returnArray[25]
+            returnArray[10] = returnArray[18]
+            returnArray[11] = returnArray[19]
+            returnArray[12] = returnArray[20]
+            returnArray[13] = returnArray[21]
+            returnArray[14] = returnArray[22]
+            returnArray[15] = returnArray[23]
+            returnArray[16] = returnArray[24]
+            returnArray[17] = returnArray[25]
 		}
 		if( isAltKeyboard == 2 ){
             
