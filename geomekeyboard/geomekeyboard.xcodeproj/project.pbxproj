@@ -76,6 +76,12 @@
 		572249281B86555B008B8371 /* InputMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 572249271B86555B008B8371 /* InputMono-Light.ttf */; };
 		572249291B86555B008B8371 /* InputMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 572249271B86555B008B8371 /* InputMono-Light.ttf */; };
 		5722492A1B86555B008B8371 /* InputMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 572249271B86555B008B8371 /* InputMono-Light.ttf */; };
+		5722492D1B866BD5008B8371 /* sfx.click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5722492B1B866BD5008B8371 /* sfx.click2.wav */; };
+		5722492E1B866BD5008B8371 /* sfx.click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5722492B1B866BD5008B8371 /* sfx.click2.wav */; };
+		5722492F1B866BD5008B8371 /* sfx.click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5722492B1B866BD5008B8371 /* sfx.click2.wav */; };
+		572249301B866BD5008B8371 /* sfx.click1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5722492C1B866BD5008B8371 /* sfx.click1.wav */; };
+		572249311B866BD5008B8371 /* sfx.click1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5722492C1B866BD5008B8371 /* sfx.click1.wav */; };
+		572249321B866BD5008B8371 /* sfx.click1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5722492C1B866BD5008B8371 /* sfx.click1.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +189,8 @@
 		03EB11101A4F405800D29D3C /* char.semicolon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char.semicolon.png; sourceTree = "<group>"; };
 		03EB11111A4F405800D29D3C /* char.hash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char.hash.png; sourceTree = "<group>"; };
 		572249271B86555B008B8371 /* InputMono-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "InputMono-Light.ttf"; sourceTree = "<group>"; };
+		5722492B1B866BD5008B8371 /* sfx.click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx.click2.wav; sourceTree = "<group>"; };
+		5722492C1B866BD5008B8371 /* sfx.click1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx.click1.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +303,8 @@
 		03E19BE01A4DF3AA0022643E /* geomekeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				5722492B1B866BD5008B8371 /* sfx.click2.wav */,
+				5722492C1B866BD5008B8371 /* sfx.click1.wav */,
 				037ECEE01A50EC6D00B14AC1 /* logo.png */,
 				03E19BE31A4DF3AA0022643E /* AppDelegate.swift */,
 				03E19BE51A4DF3AA0022643E /* ViewController.swift */,
@@ -467,6 +477,8 @@
 				572249281B86555B008B8371 /* InputMono-Light.ttf in Resources */,
 				03E19BEE1A4DF3AA0022643E /* LaunchScreen.xib in Resources */,
 				03E19BEB1A4DF3AA0022643E /* Images.xcassets in Resources */,
+				572249301B866BD5008B8371 /* sfx.click1.wav in Resources */,
+				5722492D1B866BD5008B8371 /* sfx.click2.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +487,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5722492A1B86555B008B8371 /* InputMono-Light.ttf in Resources */,
+				5722492F1B866BD5008B8371 /* sfx.click2.wav in Resources */,
+				572249321B866BD5008B8371 /* sfx.click1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +499,7 @@
 				035A70B01A509FCB00186306 /* char.6.png in Resources */,
 				030AC9AC1A51DF9E003AAAA0 /* char.exclamation.png in Resources */,
 				03170CE21A4F0C6E00BB6E56 /* char.o.png in Resources */,
+				5722492E1B866BD5008B8371 /* sfx.click2.wav in Resources */,
 				035A70B21A509FCB00186306 /* char.8.png in Resources */,
 				03170CDA1A4F0C1600BB6E56 /* char.s.png in Resources */,
 				03170CF11A4F0FAC00BB6E56 /* char.alt.png in Resources */,
@@ -495,6 +510,7 @@
 				03E19C151A4DF50B0022643E /* geomekey.xib in Resources */,
 				03170CC31A4F0A5900BB6E56 /* char.i.png in Resources */,
 				03170CEC1A4F0E3B00BB6E56 /* char.back.png in Resources */,
+				572249311B866BD5008B8371 /* sfx.click1.wav in Resources */,
 				03170CDB1A4F0C1600BB6E56 /* char.t.png in Resources */,
 				03EB11171A4F405800D29D3C /* char.hash.png in Resources */,
 				035A70AD1A509FCB00186306 /* char.3.png in Resources */,

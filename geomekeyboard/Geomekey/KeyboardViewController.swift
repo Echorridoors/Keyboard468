@@ -8,10 +8,17 @@
 //
 
 import UIKit
+import AVFoundation
+import AudioToolbox
 
 var currentLetter:String = ""
 var currentIndex:Int?
 var debugDataSetAccess:Int = 0
+
+var sfx_click1 = NSURL()
+var sfx_click2 = NSURL()
+
+var audioPlayer = AVAudioPlayer()
 
 class KeyboardViewController: UIInputViewController
 {
@@ -59,11 +66,16 @@ class KeyboardViewController: UIInputViewController
 	{
 		var proxy = textDocumentProxy as! UITextDocumentProxy
 		proxy.deleteBackward()
+		
+		playSound(sfx_click1)
 	}
 	
     override func viewDidLoad()
 	{
         super.viewDidLoad()
+		
+		sfx_click1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("sfx.click1", ofType: "wav")!)!
+		sfx_click2 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("sfx.click2", ofType: "wav")!)!
 		
 		loadInterface()
     
@@ -235,6 +247,8 @@ class KeyboardViewController: UIInputViewController
 		if(sender.tag == 32 ){
 			keyRepeatTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("textBackspace"), userInfo: nil, repeats: true)
 		}
+		
+		playSound(sfx_click1)
 	}
 	
 	@IBAction func buttonDrag(sender: UIButton)
@@ -334,6 +348,7 @@ class KeyboardViewController: UIInputViewController
 		}
 		
 		sender.frame = self.keyboardKeyLayouts(sender.tag)
+		playSound(sfx_click2)
 	}
 	
 	func loadInterface()
@@ -589,6 +604,16 @@ class KeyboardViewController: UIInputViewController
 		buttonFrame = CGRectMake(buttonFrame.origin.x + 1, buttonFrame.origin.y + 1, buttonFrame.size.width - 2, buttonFrame.size.height - 2)
 		
 		return buttonFrame
+	}
+	
+	// MARK: - Sounds
+	
+	func playSound(sound:NSURL)
+	{
+		audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: nil)
+		audioPlayer.prepareToPlay()
+		audioPlayer.volume = 0.1
+		audioPlayer.play()
 	}
 
 }
