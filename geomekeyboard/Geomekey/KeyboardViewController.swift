@@ -32,7 +32,7 @@ class KeyboardViewController: UIInputViewController
 	func textInject( character:String)
 	{
 		println("INSERT: \(character) - \(isKeyHeld)")
-		var proxy = textDocumentProxy as UITextDocumentProxy
+		var proxy = textDocumentProxy as! UITextDocumentProxy
 		
 		if( isKeyHeld == 1 ){
 			if( character == "'" ){ proxy.insertText("\"") }
@@ -57,17 +57,19 @@ class KeyboardViewController: UIInputViewController
 	
 	func textBackspace()
 	{
-		var proxy = textDocumentProxy as UITextDocumentProxy
+		var proxy = textDocumentProxy as! UITextDocumentProxy
 		proxy.deleteBackward()
 	}
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		NSLog("Available fonts: %@", UIFont.familyNames())
+		
 		loadInterface()
     
         // Perform custom UI setup here
-        self.nextKeyboardButton = UIButton.buttonWithType(.System) as UIButton
+        self.nextKeyboardButton = UIButton.buttonWithType(.System) as! UIButton
     
         self.nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), forState: .Normal)
         self.nextKeyboardButton.sizeToFit()
@@ -115,7 +117,7 @@ class KeyboardViewController: UIInputViewController
 
 		// Animate In
 		var count = 0
-		for subview in view.subviews as [UIView] {
+		for subview in view.subviews as! [UIView] {
 			
 			let destination:CGRect = subview.frame
 			let offsetDistance:CGFloat = 40 * CGFloat(count)
@@ -133,66 +135,23 @@ class KeyboardViewController: UIInputViewController
 	{
 		var targetLayout:Array = dataSetOrdered(currentLetter)
 
-		for subview in view.subviews as [UIView] {
-			
-			if ( subview is UIButton ) {
-				
-				var button = subview as UIButton
+		for subview in view.subviews as! [UIView]
+		{
+			if ( subview is UIButton )
+			{
+				var button = subview as! UIButton
 				var currentLetterId:Int = Int(subview.tag)
 				if( currentLetterId < targetLayout.count )
 				{
 					var currentLetterString = targetLayout[currentLetterId]
-                    NSLog("> %@",currentLetterString)
-                    
 					button.frame = keyboardKeyLayouts(currentLetterId)
-					if let image  = UIImage(named: "char.\(currentLetterString)") {
-						button.setImage(image, forState: UIControlState.Normal)
-						if( currentLetter == currentLetterString ){
-							button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
-						}
-						else{
-							button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
-						}
-					}
+					button.setTitle(currentLetterString.uppercaseString, forState: UIControlState.Normal)
 				}
 				else if( button.tag == 28 ){ button.frame = keyboardKeyLayouts(28) }
 				else if( button.tag == 29 ){ button.frame = keyboardKeyLayouts(29) }
 				else if( button.tag == 30 ){ button.frame = keyboardKeyLayouts(30) }
 				else if( button.tag == 31 ){ button.frame = keyboardKeyLayouts(31) }
 				else if( button.tag == 32 ){ button.frame = keyboardKeyLayouts(32) }
-			}
-			
-		}
-	}
-	
-	func templateHighlight( sender:UIButton)
-	{
-		let touchPoint = CGPointMake(sender.frame.origin.x + (sender.frame.width/2), sender.frame.origin.y + (sender.frame.height/2))
-		
-		for subview in view.subviews as [UIView] {
-			
-			if ( subview is UIButton ) {
-				
-				let button = subview as UIButton
-				
-				let buttonPoint = CGPointMake(button.frame.origin.x + (button.frame.width/2), button.frame.origin.y + (button.frame.height/2))
-				
-				let diffx = Float(touchPoint.x - buttonPoint.x)
-				let diffy = Float(touchPoint.y - buttonPoint.y)
-				let distance = hypotf(diffx, diffy)
-				
-				var intensity:CGFloat = (300 - CGFloat(distance)) / 300
-				
-				if( intensity > 0.5 ){
-					intensity = 0.5
-				}
-				if( intensity < 0.2 ){
-					intensity = 0.2
-				}
-				if( distance == 0 ){
-					intensity = 1.0
-				}
-				button.layer.borderColor = UIColor(white: (intensity+0.5)*intensity, alpha: 1).CGColor
 			}
 		}
 	}
@@ -203,20 +162,11 @@ class KeyboardViewController: UIInputViewController
 		
 		// Button
 		
-		let button   = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+		let button   = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
 		
 		button.frame = buttonFrame
 		button.tag = order;
-		
-		button.layer.borderWidth = 1
-		
-		if( letter == currentLetter ){
-			button.layer.borderColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1).CGColor
-		}
-		else{
-			button.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).CGColor
-		}
-		
+
 		button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
 		button.addTarget(self, action: "buttonDown:", forControlEvents: UIControlEvents.TouchDown)
 		button.addTarget(self, action: "buttonDrag:", forControlEvents: UIControlEvents.TouchDragOutside)
@@ -224,19 +174,18 @@ class KeyboardViewController: UIInputViewController
 		button.clipsToBounds = true
 		
 		if let image  = UIImage(named: "char.\(letter.lowercaseString)") {
-			button.setImage(image, forState: UIControlState.Normal)
-			button.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
-		}
-		else{
-			button.backgroundColor = UIColor.redColor()
+//			button.setImage(image, forState: UIControlState.Normal)
 		}
 		
 		if( order < 10 && isAltKeyboard == 1 ){
-			var numberImage=UIImageView(frame: CGRectMake( 4 , 3 , 9, 11))
-			numberImage.image = UIImage(named:"char.\(order)")
-			numberImage.alpha = 0.5
-			button.addSubview(numberImage)
+//			var numberImage=UIImageView(frame: CGRectMake( 4 , 3 , 9, 11))
+//			numberImage.image = UIImage(named:"char.\(order)")
+//			numberImage.alpha = 0.5
+//			button.addSubview(numberImage)
 		}
+		
+		button.setTitle(letter.uppercaseString, forState: UIControlState.Normal)
+		button.titleLabel?.font = UIFont(name: "Input Mono", size: 20)
 		
 		view.addSubview(button)
 	}
@@ -346,10 +295,7 @@ class KeyboardViewController: UIInputViewController
 			templateUpdate()
 		}
 		
-		sender.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
 		sender.frame = self.keyboardKeyLayouts(sender.tag)
-		templateHighlight(sender)
-		
 	}
 	
 	func loadInterface()
@@ -357,7 +303,7 @@ class KeyboardViewController: UIInputViewController
 		// load the nib file
 		var calculatorNib = UINib(nibName: "geomekey", bundle: nil)
 		// instantiate the view
-		geomekeyView = calculatorNib.instantiateWithOwner(self, options: nil)[0] as UIView
+		geomekeyView = calculatorNib.instantiateWithOwner(self, options: nil)[0] as! UIView
 		
 		// add the interface to the main view
 		geomekeyView.backgroundColor = UIColor.blackColor()
@@ -380,7 +326,7 @@ class KeyboardViewController: UIInputViewController
         // The app has just changed the document's contents, the document context has been updated.
     
         var textColor: UIColor
-        var proxy = self.textDocumentProxy as UITextDocumentProxy
+        var proxy = self.textDocumentProxy as! UITextDocumentProxy
         if proxy.keyboardAppearance == UIKeyboardAppearance.Dark {
             textColor = UIColor.whiteColor()
         } else {
