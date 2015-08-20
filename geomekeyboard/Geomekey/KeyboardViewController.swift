@@ -119,11 +119,13 @@ class KeyboardViewController: UIInputViewController
 		for subview in view.subviews as! [UIView] {
 			
 			let destination:CGRect = subview.frame
-			let offsetDistance:CGFloat = 40 * CGFloat(count)
-			subview.frame = CGRectOffset(subview.frame, 0, 200 + offsetDistance )
+			let offsetDistance:CGFloat = 5 * CGFloat(count)
+			subview.frame = CGRectOffset(subview.frame, 0, 1 )
+			subview.alpha = 0
 
-			UIView.animateWithDuration(0.5, delay:0, options: .CurveEaseOut, animations: {
+			UIView.animateWithDuration(0.2, delay:Double(Float(count)/50.5), options: nil, animations: {
 				subview.frame = destination
+				subview.alpha = 1
 			}, completion: { finished in
 			})
 			count += 1
