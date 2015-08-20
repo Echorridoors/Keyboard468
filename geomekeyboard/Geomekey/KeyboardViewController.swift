@@ -61,10 +61,9 @@ class KeyboardViewController: UIInputViewController
 		proxy.deleteBackward()
 	}
 	
-    override func viewDidLoad() {
+    override func viewDidLoad()
+	{
         super.viewDidLoad()
-		
-		NSLog("Available fonts: %@", UIFont.familyNames())
 		
 		loadInterface()
     
@@ -145,7 +144,35 @@ class KeyboardViewController: UIInputViewController
 				{
 					var currentLetterString = targetLayout[currentLetterId]
 					button.frame = keyboardKeyLayouts(currentLetterId)
-					button.setTitle(currentLetterString.uppercaseString, forState: UIControlState.Normal)
+					
+					// Select Button Character
+					var buttonChar = currentLetterString.uppercaseString
+					
+					if count(buttonChar) > 1 {
+						if currentLetterString == "space" { buttonChar = "_"}
+						else if currentLetterString == "back" { buttonChar = "<"}
+						else if currentLetterString == "alt" { buttonChar = "∆"}
+						else if currentLetterString == "keyboard" { buttonChar = "≡"}
+						else if currentLetterString == "enter" { buttonChar = "¶"}
+						else if currentLetterString == "plus" { buttonChar = "+"}
+						else if currentLetterString == "minus" { buttonChar = "-"}
+						else if currentLetterString == "dash" { buttonChar = "/"}
+						else if currentLetterString == "atsign" { buttonChar = "@"}
+						else if currentLetterString == "parenthesisleft" { buttonChar = "("}
+						else if currentLetterString == "parenthesisright" { buttonChar = ")"}
+						else if currentLetterString == "colon" { buttonChar = ","}
+						else if currentLetterString == "period" { buttonChar = "."}
+						else if currentLetterString == "apostrophe" { buttonChar = "'"}
+						else if currentLetterString == "exclamation" { buttonChar = "!"}
+						else{
+							println("Missing character: \(count(buttonChar)) -> \(currentLetterString)")
+						}
+					}
+		
+					if currentLetterString == "a" || currentLetterString == "e" || currentLetterString == "i" || currentLetterString == "o" || currentLetterString == "u" { button.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal) }
+					else{ button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal) }
+					
+					button.setTitle(buttonChar, forState: UIControlState.Normal)
 				}
 				else if( button.tag == 28 ){ button.frame = keyboardKeyLayouts(28) }
 				else if( button.tag == 29 ){ button.frame = keyboardKeyLayouts(29) }
@@ -173,19 +200,25 @@ class KeyboardViewController: UIInputViewController
 		button.layer.cornerRadius = 2
 		button.clipsToBounds = true
 		
-		if let image  = UIImage(named: "char.\(letter.lowercaseString)") {
-//			button.setImage(image, forState: UIControlState.Normal)
+		// Select Button Character
+		var buttonChar = letter.uppercaseString
+		
+		if count(buttonChar) > 1 {
+			if letter == "space" { buttonChar = "_"}
+			else if letter == "back" { buttonChar = "<"}
+			else if letter == "alt" { buttonChar = "∆"}
+			else if letter == "keyboard" { buttonChar = "≡"}
+			else if letter == "enter" { buttonChar = "¶"}
+			else{
+				println("\(count(buttonChar)) -> \(letter)")
+			}
 		}
 		
-		if( order < 10 && isAltKeyboard == 1 ){
-//			var numberImage=UIImageView(frame: CGRectMake( 4 , 3 , 9, 11))
-//			numberImage.image = UIImage(named:"char.\(order)")
-//			numberImage.alpha = 0.5
-//			button.addSubview(numberImage)
-		}
+		if letter == "a" || letter == "e" || letter == "i" || letter == "o" || letter == "u" { button.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal) }
+		else{ button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal) }
 		
-		button.setTitle(letter.uppercaseString, forState: UIControlState.Normal)
-		button.titleLabel?.font = UIFont(name: "Input Mono", size: 20)
+		button.setTitle(buttonChar, forState: UIControlState.Normal)
+		button.titleLabel?.font = UIFont(name: "Input Mono", size: 16)
 		
 		view.addSubview(button)
 	}
@@ -193,19 +226,20 @@ class KeyboardViewController: UIInputViewController
 	@IBAction func buttonDown(sender: UIButton)
 	{
 		keyTimer?.invalidate()
-		sender.frame = CGRectMake(sender.frame.origin.x, sender.frame.origin.y + 6, sender.frame.width, sender.frame.height - 6)
 		sender.backgroundColor = UIColor.whiteColor()
+		sender.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
 		keyTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("keyHeld"), userInfo: nil, repeats: false)
 		
 		if(sender.tag == 32 ){
 			keyRepeatTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("textBackspace"), userInfo: nil, repeats: true)
 		}
-		
 	}
 	
 	@IBAction func buttonDrag(sender: UIButton)
 	{
 		templateUpdate()
+		sender.backgroundColor = UIColor.blackColor()
+		sender.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
 	}
 	
 	func keyHeld()
@@ -217,6 +251,8 @@ class KeyboardViewController: UIInputViewController
 	{
 		keyTimer?.invalidate()
 		keyRepeatTimer?.invalidate()
+		sender.backgroundColor = UIColor.blackColor()
+		sender.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
 		
 		let currentDataSetOrdered = dataSetOrdered(currentLetter)
 		
@@ -386,11 +422,6 @@ class KeyboardViewController: UIInputViewController
 		
 		segment4 = segment4.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
         
-        NSLog("SEG1 %@",segment1)
-        NSLog("SEG2 %@",segment2)
-        NSLog("SEG3 %@",segment3)
-        NSLog("SEG4 %@",segment4)
-        
         var returnArray = segment1 + segment2 + segment3 + segment4
         
 		// ALT
@@ -451,7 +482,6 @@ class KeyboardViewController: UIInputViewController
 	func dataSet(target:String) -> Array<String>
 	{
 		debugDataSetAccess += 1
-		println("access dataset \(debugDataSetAccess)")
 		
 		var dataList = [""]
 		
