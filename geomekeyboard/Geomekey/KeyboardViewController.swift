@@ -38,7 +38,7 @@ class KeyboardViewController: UIInputViewController
 		
 		if( isKeyHeld == 1 ){
 			if( character == "'" ){ proxy.insertText("\"") }
-			else if( character == ":" ){ proxy.insertText(":") }
+			else if( character == ":" ){ proxy.insertText(";") }
 			else if( character == "." ){ proxy.insertText(",") }
 			else if( character == "-" ){ proxy.insertText("_") }
 			else if( character == "(" ){ proxy.insertText("[") }
@@ -170,6 +170,7 @@ class KeyboardViewController: UIInputViewController
 						else if currentLetterString == "period" { buttonChar = "."}
 						else if currentLetterString == "apostrophe" { buttonChar = "'"}
 						else if currentLetterString == "exclamation" { buttonChar = "!"}
+						else if currentLetterString == "twodots" { buttonChar = ":"}
 						else{
 							println("Missing character: \(count(buttonChar)) -> \(currentLetterString)")
 						}
@@ -437,7 +438,7 @@ class KeyboardViewController: UIInputViewController
 		
         if( isAltKeyboard == 1 ){
             returnArray[0] = "apostrophe"
-            returnArray[1] = "colon"
+            returnArray[1] = "twodots"
             returnArray[2] = "period"
             returnArray[3] = "minus"
             
