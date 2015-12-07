@@ -33,8 +33,8 @@ class KeyboardViewController: UIInputViewController
 	
 	func textInject( character:String)
 	{
-		println("INSERT: \(character) - \(isKeyHeld)")
-		var proxy = textDocumentProxy as! UITextDocumentProxy
+		print("INSERT: \(character) - \(isKeyHeld)")
+		let proxy = textDocumentProxy 
 		
 		if( isKeyHeld == 1 ){
 			if( character == "'" ){ proxy.insertText("\"") }
@@ -59,7 +59,7 @@ class KeyboardViewController: UIInputViewController
 	
 	func textBackspace()
 	{
-		var proxy = textDocumentProxy as! UITextDocumentProxy
+		let proxy = textDocumentProxy 
 		proxy.deleteBackward()
 		
 		UIDevice.currentDevice().playInputClick()
@@ -72,30 +72,30 @@ class KeyboardViewController: UIInputViewController
 		loadInterface()
     
         // Perform custom UI setup here
-        self.nextKeyboardButton = UIButton.buttonWithType(.System) as! UIButton
+        self.nextKeyboardButton = UIButton(type: .System)
     
         self.nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), forState: .Normal)
         self.nextKeyboardButton.sizeToFit()
-        self.nextKeyboardButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
     
         self.nextKeyboardButton.addTarget(self, action: "advanceToNextInputMode", forControlEvents: .TouchUpInside)
 		self.nextKeyboardButton.hidden = true;
 		
         self.view.addSubview(self.nextKeyboardButton)
     
-        var nextKeyboardButtonLeftSideConstraint = NSLayoutConstraint(item: self.nextKeyboardButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1.0, constant: 0.0)
-        var nextKeyboardButtonBottomConstraint = NSLayoutConstraint(item: self.nextKeyboardButton, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+        let nextKeyboardButtonLeftSideConstraint = NSLayoutConstraint(item: self.nextKeyboardButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1.0, constant: 0.0)
+        let nextKeyboardButtonBottomConstraint = NSLayoutConstraint(item: self.nextKeyboardButton, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
         self.view.addConstraints([nextKeyboardButtonLeftSideConstraint, nextKeyboardButtonBottomConstraint])
     }
 	
 	func templateStart()
 	{
 		if( view.frame.width > 0 ){
-			println("Loading interface, done.")
+			print("Loading interface, done.")
 			interfaceReady?.invalidate()
 		}
 		else{
-			println("Trying to load interface, retrying in 0.1sec")
+			print("Trying to load interface, retrying in 0.1sec")
 			return
 		}
 		
@@ -120,14 +120,13 @@ class KeyboardViewController: UIInputViewController
 
 		// Animate In
 		var count = 0
-		for subview in view.subviews as! [UIView] {
+		for subview in view.subviews {
 			
 			let destination:CGRect = subview.frame
-			let offsetDistance:CGFloat = 5 * CGFloat(count)
 			subview.frame = CGRectOffset(subview.frame, 0, 1 )
 			subview.alpha = 0
 
-			UIView.animateWithDuration(0.2, delay:Double(Float(count)/50.5), options: nil, animations: {
+			UIView.animateWithDuration(0.2, delay:Double(Float(count)/50.5), options: [], animations: {
 				subview.frame = destination
 				subview.alpha = 1
 			}, completion: { finished in
@@ -140,21 +139,21 @@ class KeyboardViewController: UIInputViewController
 	{
 		var targetLayout:Array = dataSetOrdered(currentLetter)
 
-		for subview in view.subviews as! [UIView]
+		for subview in view.subviews 
 		{
 			if ( subview is UIButton )
 			{
-				var button = subview as! UIButton
-				var currentLetterId:Int = Int(subview.tag)
+				let button = subview as! UIButton
+				let currentLetterId:Int = Int(subview.tag)
 				if( currentLetterId < targetLayout.count )
 				{
-					var currentLetterString = targetLayout[currentLetterId]
+					let currentLetterString = targetLayout[currentLetterId]
 					button.frame = keyboardKeyLayouts(currentLetterId)
 					
 					// Select Button Character
 					var buttonChar = currentLetterString.uppercaseString
 					
-					if count(buttonChar) > 1 {
+					if buttonChar.characters.count > 1 {
 						if currentLetterString == "space" { buttonChar = "_"}
 						else if currentLetterString == "back" { buttonChar = "<"}
 						else if currentLetterString == "alt" { buttonChar = "∆"}
@@ -172,7 +171,7 @@ class KeyboardViewController: UIInputViewController
 						else if currentLetterString == "exclamation" { buttonChar = "!"}
 						else if currentLetterString == "twodots" { buttonChar = ":"}
 						else{
-							println("Missing character: \(count(buttonChar)) -> \(currentLetterString)")
+							print("Missing character: \(buttonChar.characters.count) -> \(currentLetterString)")
 						}
 					}
 		
@@ -196,7 +195,7 @@ class KeyboardViewController: UIInputViewController
 		
 		// Button
 		
-		let button   = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+		let button   = UIButton(type: UIButtonType.Custom)
 		
 		button.frame = buttonFrame
 		button.tag = order;
@@ -210,14 +209,14 @@ class KeyboardViewController: UIInputViewController
 		// Select Button Character
 		var buttonChar = letter.uppercaseString
 		
-		if count(buttonChar) > 1 {
+		if buttonChar.characters.count > 1 {
 			if letter == "space" { buttonChar = "_"}
 			else if letter == "back" { buttonChar = "<"}
 			else if letter == "alt" { buttonChar = "∆"}
 			else if letter == "keyboard" { buttonChar = "≡"}
 			else if letter == "enter" { buttonChar = "¶"}
 			else{
-				println("\(count(buttonChar)) -> \(letter)")
+				print("\(buttonChar.characters.count) -> \(letter)")
 			}
 		}
 		
@@ -347,7 +346,7 @@ class KeyboardViewController: UIInputViewController
 	func loadInterface()
 	{
 		// load the nib file
-		var calculatorNib = UINib(nibName: "geomekey", bundle: nil)
+		let calculatorNib = UINib(nibName: "geomekey", bundle: nil)
 		// instantiate the view
 		geomekeyView = calculatorNib.instantiateWithOwner(self, options: nil)[0] as! UIView
 		
@@ -364,15 +363,15 @@ class KeyboardViewController: UIInputViewController
         // Dispose of any resources that can be recreated
     }
 
-    override func textWillChange(textInput: UITextInput) {
+    override func textWillChange(textInput: UITextInput?) {
         // The app is about to change the document's contents. Perform any preparation here.
     }
 
-    override func textDidChange(textInput: UITextInput) {
+    override func textDidChange(textInput: UITextInput?) {
         // The app has just changed the document's contents, the document context has been updated.
     
         var textColor: UIColor
-        var proxy = self.textDocumentProxy as! UITextDocumentProxy
+        let proxy = self.textDocumentProxy 
         if proxy.keyboardAppearance == UIKeyboardAppearance.Dark {
             textColor = UIColor.whiteColor()
         } else {
@@ -391,7 +390,7 @@ class KeyboardViewController: UIInputViewController
 		if(dataSetTarget.count > 2 ){ segment1.append(dataSetTarget[2]) }
 		if(dataSetTarget.count > 3 ){ segment1.append(dataSetTarget[3]) }
 		
-		segment1 = segment1.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+		segment1 = segment1.sort {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
 
 		var segment2:[String] = []
 
@@ -404,7 +403,7 @@ class KeyboardViewController: UIInputViewController
 		
 		// Preserve Current Letter
 		
-		segment2 = segment2.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+		segment2 = segment2.sort {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
 
 		var segment3:[String] = []
 
@@ -417,7 +416,7 @@ class KeyboardViewController: UIInputViewController
 		if(dataSetTarget.count > 16 ){ segment2.append(dataSetTarget[16]) }
 		if(dataSetTarget.count > 17 ){ segment2.append(dataSetTarget[17]) }
 		
-		segment3 = segment3.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+		segment3 = segment3.sort {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
 
 		var segment4:[String] = []
 
@@ -430,7 +429,7 @@ class KeyboardViewController: UIInputViewController
 		if(dataSetTarget.count > 24 ){ segment2.append(dataSetTarget[24]) }
 		if(dataSetTarget.count > 25 ){ segment2.append(dataSetTarget[25]) }
 		
-		segment4 = segment4.sorted {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+		segment4 = segment4.sort {$0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
         
         var returnArray = segment1 + segment2 + segment3 + segment4
         
@@ -477,8 +476,8 @@ class KeyboardViewController: UIInputViewController
 			
 			// If the letter already exists in the array, remove to avoid duplicates
 
-			if( find(returnArray,currentLetter) != nil ){
-				returnArray.removeAtIndex( find(returnArray,currentLetter)! )
+			if( returnArray.indexOf(currentLetter) != nil ){
+				returnArray.removeAtIndex( returnArray.indexOf(currentLetter)! )
 			}
 			
 			// Add letter at current position
@@ -527,8 +526,8 @@ class KeyboardViewController: UIInputViewController
 		
 		// Add missing letters
 
-		for (index,element) in enumerate(letterFreq) {
-			if(( find(dataList,element) ) == nil){
+		for (_,element) in letterFreq.enumerate() {
+			if(( dataList.indexOf(element) ) == nil){
 				dataList.append(element) 
 			}
 		}

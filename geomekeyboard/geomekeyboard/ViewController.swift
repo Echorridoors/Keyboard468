@@ -27,7 +27,7 @@ class ViewController: UIViewController
 	
 	@IBAction func testInput(sender: UITextField)
 	{
-		textUpdate(sender.text)
+		textUpdate(sender.text!)
 	}
 	
 	func textUpdate(text:String)
@@ -38,7 +38,7 @@ class ViewController: UIViewController
 				tutorialLabel.text = "Try typing: The help is on its way."
 				tutorialLabel.textColor = UIColor.whiteColor()
 			}
-			else if( text.substringToIndex(advance(text.startIndex, 1)) == "t" ){
+			else if( text.substringToIndex(text.startIndex.advancedBy(1)) == "t" ){
 				tutorialLabel.text = "Hold a key down to capitalize it."
 				tutorialLabel.textColor = UIColor.redColor()
 			}
@@ -58,7 +58,7 @@ class ViewController: UIViewController
 				tutorialLabel.text = "Well done, try typing: See you at 3pm."
 				tutorialLabel.textColor = UIColor.greenColor()
 			}
-			else if( text.substringToIndex(advance(text.startIndex, 1)) == "s" ){
+			else if( text.substringToIndex(text.startIndex.advancedBy(1)) == "s" ){
 				tutorialLabel.text = "Hold a key down to capitalize it."
 				tutorialLabel.textColor = UIColor.redColor()
 			}

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		037ECEE11A50EC6D00B14AC1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 037ECEE01A50EC6D00B14AC1 /* logo.png */; };
 		03E19BE41A4DF3AA0022643E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E19BE31A4DF3AA0022643E /* AppDelegate.swift */; };
 		03E19BE61A4DF3AA0022643E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E19BE51A4DF3AA0022643E /* ViewController.swift */; };
 		03E19BE91A4DF3AA0022643E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E19BE71A4DF3AA0022643E /* Main.storyboard */; };
@@ -55,7 +54,6 @@
 
 /* Begin PBXFileReference section */
 		030AC9A81A51A7CD003AAAA0 /* Geomekey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Geomekey.entitlements; sourceTree = "<group>"; };
-		037ECEE01A50EC6D00B14AC1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		03E19BDE1A4DF3AA0022643E /* geomekeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geomekeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E19BE21A4DF3AA0022643E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03E19BE31A4DF3AA0022643E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 		03E19BE01A4DF3AA0022643E /* geomekeyboard */ = {
 			isa = PBXGroup;
 			children = (
-				037ECEE01A50EC6D00B14AC1 /* logo.png */,
 				03E19BE31A4DF3AA0022643E /* AppDelegate.swift */,
 				03E19BE51A4DF3AA0022643E /* ViewController.swift */,
 				03E19BE71A4DF3AA0022643E /* Main.storyboard */,
@@ -240,7 +237,9 @@
 		03E19BD61A4DF3AA0022643E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = XXIIVV;
 				TargetAttributes = {
 					03E19BDD1A4DF3AA0022643E = {
@@ -286,7 +285,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				037ECEE11A50EC6D00B14AC1 /* logo.png in Resources */,
 				03E19BE91A4DF3AA0022643E /* Main.storyboard in Resources */,
 				572249281B86555B008B8371 /* InputMono-Light.ttf in Resources */,
 				03E19BEE1A4DF3AA0022643E /* LaunchScreen.xib in Resources */,
@@ -394,6 +392,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -457,9 +456,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = geomekeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxiivv.468;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -468,9 +469,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = geomekeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxiivv.468;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -489,6 +492,7 @@
 				);
 				INFOPLIST_FILE = geomekeyboardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xxiivv.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/geomekeyboard.app/geomekeyboard";
 			};
@@ -504,6 +508,7 @@
 				);
 				INFOPLIST_FILE = geomekeyboardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xxiivv.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/geomekeyboard.app/geomekeyboard";
 			};
@@ -521,6 +526,7 @@
 				);
 				INFOPLIST_FILE = Geomekey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xxiivv.468.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -535,6 +541,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Geomekey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xxiivv.468.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
