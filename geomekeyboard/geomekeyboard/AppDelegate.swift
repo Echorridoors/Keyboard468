@@ -1,16 +1,12 @@
-//
-//  AppDelegate.swift
-//  geomekeyboard
-//
+
 //  Created by Devine Lu Linvega on 2014-12-26.
 //  Copyright (c) 2014 XXIIVV. All rights reserved.
-//
 
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate
+{
 	var window: UIWindow?
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

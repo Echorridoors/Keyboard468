@@ -26,9 +26,9 @@ class KeyboardViewController: UIInputViewController
 	var isKeyHeld = 0
 	var isAltKeyboard = 0
 	
-    override func updateViewConstraints() {
+    override func updateViewConstraints()
+	{
         super.updateViewConstraints()
-        // Add custom view sizing constraints here
     }
 	
 	func textInject( character:String)
@@ -54,7 +54,6 @@ class KeyboardViewController: UIInputViewController
 		else{
 			proxy.insertText(character)
 		}
-		
 	}
 	
 	func textBackspace()
@@ -597,5 +596,4 @@ class KeyboardViewController: UIInputViewController
 		
 		return buttonFrame
 	}
-
 }

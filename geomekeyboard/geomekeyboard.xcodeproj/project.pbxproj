@@ -12,23 +12,15 @@
 		03E19BE91A4DF3AA0022643E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E19BE71A4DF3AA0022643E /* Main.storyboard */; };
 		03E19BEB1A4DF3AA0022643E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03E19BEA1A4DF3AA0022643E /* Images.xcassets */; };
 		03E19BEE1A4DF3AA0022643E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E19BEC1A4DF3AA0022643E /* LaunchScreen.xib */; };
-		03E19BFA1A4DF3AA0022643E /* geomekeyboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E19BF91A4DF3AA0022643E /* geomekeyboardTests.swift */; };
 		03E19C0C1A4DF45C0022643E /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E19C0B1A4DF45C0022643E /* KeyboardViewController.swift */; };
 		03E19C0F1A4DF45C0022643E /* Geomekey.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 03E19C071A4DF45C0022643E /* Geomekey.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		03E19C151A4DF50B0022643E /* geomekey.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E19C141A4DF50B0022643E /* geomekey.xib */; };
 		572249281B86555B008B8371 /* InputMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 572249271B86555B008B8371 /* InputMono-Light.ttf */; };
 		572249291B86555B008B8371 /* InputMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 572249271B86555B008B8371 /* InputMono-Light.ttf */; };
-		5722492A1B86555B008B8371 /* InputMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 572249271B86555B008B8371 /* InputMono-Light.ttf */; };
+		57DA11231C16105D002C75AF /* badge.keyboard.468.png in Resources */ = {isa = PBXBuildFile; fileRef = 57DA11221C16105D002C75AF /* badge.keyboard.468.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		03E19BF41A4DF3AA0022643E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 03E19BD61A4DF3AA0022643E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 03E19BDD1A4DF3AA0022643E;
-			remoteInfo = geomekeyboard;
-		};
 		03E19C0D1A4DF45C0022643E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 03E19BD61A4DF3AA0022643E /* Project object */;
@@ -61,25 +53,17 @@
 		03E19BE81A4DF3AA0022643E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03E19BEA1A4DF3AA0022643E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		03E19BED1A4DF3AA0022643E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		03E19BF31A4DF3AA0022643E /* geomekeyboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = geomekeyboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		03E19BF81A4DF3AA0022643E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03E19BF91A4DF3AA0022643E /* geomekeyboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geomekeyboardTests.swift; sourceTree = "<group>"; };
 		03E19C071A4DF45C0022643E /* Geomekey.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Geomekey.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E19C0A1A4DF45C0022643E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03E19C0B1A4DF45C0022643E /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		03E19C141A4DF50B0022643E /* geomekey.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = geomekey.xib; sourceTree = "<group>"; };
 		572249271B86555B008B8371 /* InputMono-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "InputMono-Light.ttf"; sourceTree = "<group>"; };
+		57DA11221C16105D002C75AF /* badge.keyboard.468.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge.keyboard.468.png; sourceTree = "<group>"; };
+		57DA11431C1623ED002C75AF /* geomekeyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = geomekeyboard.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		03E19BDB1A4DF3AA0022643E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		03E19BF01A4DF3AA0022643E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -100,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				03E19BE01A4DF3AA0022643E /* geomekeyboard */,
-				03E19BF61A4DF3AA0022643E /* geomekeyboardTests */,
 				03E19C081A4DF45C0022643E /* Geomekey */,
 				03E19BDF1A4DF3AA0022643E /* Products */,
 			);
@@ -110,7 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				03E19BDE1A4DF3AA0022643E /* geomekeyboard.app */,
-				03E19BF31A4DF3AA0022643E /* geomekeyboardTests.xctest */,
 				03E19C071A4DF45C0022643E /* Geomekey.appex */,
 			);
 			name = Products;
@@ -119,39 +101,16 @@
 		03E19BE01A4DF3AA0022643E /* geomekeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				57DA11431C1623ED002C75AF /* geomekeyboard.entitlements */,
 				03E19BE31A4DF3AA0022643E /* AppDelegate.swift */,
 				03E19BE51A4DF3AA0022643E /* ViewController.swift */,
 				03E19BE71A4DF3AA0022643E /* Main.storyboard */,
-				03E19BEA1A4DF3AA0022643E /* Images.xcassets */,
 				03E19BEC1A4DF3AA0022643E /* LaunchScreen.xib */,
-				03E19BE11A4DF3AA0022643E /* Supporting Files */,
-			);
-			path = geomekeyboard;
-			sourceTree = "<group>";
-		};
-		03E19BE11A4DF3AA0022643E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
+				57DA11221C16105D002C75AF /* badge.keyboard.468.png */,
+				03E19BEA1A4DF3AA0022643E /* Images.xcassets */,
 				03E19BE21A4DF3AA0022643E /* Info.plist */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		03E19BF61A4DF3AA0022643E /* geomekeyboardTests */ = {
-			isa = PBXGroup;
-			children = (
-				03E19BF91A4DF3AA0022643E /* geomekeyboardTests.swift */,
-				03E19BF71A4DF3AA0022643E /* Supporting Files */,
-			);
-			path = geomekeyboardTests;
-			sourceTree = "<group>";
-		};
-		03E19BF71A4DF3AA0022643E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				03E19BF81A4DF3AA0022643E /* Info.plist */,
-			);
-			name = "Supporting Files";
+			path = geomekeyboard;
 			sourceTree = "<group>";
 		};
 		03E19C081A4DF45C0022643E /* Geomekey */ = {
@@ -159,19 +118,11 @@
 			children = (
 				030AC9A81A51A7CD003AAAA0 /* Geomekey.entitlements */,
 				03E19C0B1A4DF45C0022643E /* KeyboardViewController.swift */,
-				03E19C091A4DF45C0022643E /* Supporting Files */,
+				572249271B86555B008B8371 /* InputMono-Light.ttf */,
+				03E19C0A1A4DF45C0022643E /* Info.plist */,
 				03E19C141A4DF50B0022643E /* geomekey.xib */,
 			);
 			path = Geomekey;
-			sourceTree = "<group>";
-		};
-		03E19C091A4DF45C0022643E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				572249271B86555B008B8371 /* InputMono-Light.ttf */,
-				03E19C0A1A4DF45C0022643E /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,24 +146,6 @@
 			productName = geomekeyboard;
 			productReference = 03E19BDE1A4DF3AA0022643E /* geomekeyboard.app */;
 			productType = "com.apple.product-type.application";
-		};
-		03E19BF21A4DF3AA0022643E /* geomekeyboardTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 03E19C001A4DF3AA0022643E /* Build configuration list for PBXNativeTarget "geomekeyboardTests" */;
-			buildPhases = (
-				03E19BEF1A4DF3AA0022643E /* Sources */,
-				03E19BF01A4DF3AA0022643E /* Frameworks */,
-				03E19BF11A4DF3AA0022643E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				03E19BF51A4DF3AA0022643E /* PBXTargetDependency */,
-			);
-			name = geomekeyboardTests;
-			productName = geomekeyboardTests;
-			productReference = 03E19BF31A4DF3AA0022643E /* geomekeyboardTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		03E19C061A4DF45C0022643E /* Geomekey */ = {
 			isa = PBXNativeTarget;
@@ -244,10 +177,12 @@
 				TargetAttributes = {
 					03E19BDD1A4DF3AA0022643E = {
 						CreatedOnToolsVersion = 6.1.1;
-					};
-					03E19BF21A4DF3AA0022643E = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 03E19BDD1A4DF3AA0022643E;
+						DevelopmentTeam = B948MFAE5C;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					03E19C061A4DF45C0022643E = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -275,7 +210,6 @@
 			targets = (
 				03E19BDD1A4DF3AA0022643E /* geomekeyboard */,
 				03E19C061A4DF45C0022643E /* Geomekey */,
-				03E19BF21A4DF3AA0022643E /* geomekeyboardTests */,
 			);
 		};
 /* End PBXProject section */
@@ -289,14 +223,7 @@
 				572249281B86555B008B8371 /* InputMono-Light.ttf in Resources */,
 				03E19BEE1A4DF3AA0022643E /* LaunchScreen.xib in Resources */,
 				03E19BEB1A4DF3AA0022643E /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		03E19BF11A4DF3AA0022643E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5722492A1B86555B008B8371 /* InputMono-Light.ttf in Resources */,
+				57DA11231C16105D002C75AF /* badge.keyboard.468.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,14 +248,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		03E19BEF1A4DF3AA0022643E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				03E19BFA1A4DF3AA0022643E /* geomekeyboardTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		03E19C031A4DF45C0022643E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,11 +259,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		03E19BF51A4DF3AA0022643E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 03E19BDD1A4DF3AA0022643E /* geomekeyboard */;
-			targetProxy = 03E19BF41A4DF3AA0022643E /* PBXContainerItemProxy */;
-		};
 		03E19C0E1A4DF45C0022643E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 03E19C061A4DF45C0022643E /* Geomekey */;
@@ -457,11 +371,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = geomekeyboard/geomekeyboard.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = geomekeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xxiivv.468;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -470,47 +391,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = geomekeyboard/geomekeyboard.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = geomekeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xxiivv.468;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		03E19C011A4DF3AA0022643E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = geomekeyboardTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xxiivv.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/geomekeyboard.app/geomekeyboard";
-			};
-			name = Debug;
-		};
-		03E19C021A4DF3AA0022643E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = geomekeyboardTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xxiivv.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/geomekeyboard.app/geomekeyboard";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -565,15 +456,6 @@
 			buildConfigurations = (
 				03E19BFE1A4DF3AA0022643E /* Debug */,
 				03E19BFF1A4DF3AA0022643E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		03E19C001A4DF3AA0022643E /* Build configuration list for PBXNativeTarget "geomekeyboardTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				03E19C011A4DF3AA0022643E /* Debug */,
-				03E19C021A4DF3AA0022643E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
