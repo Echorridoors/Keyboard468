@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "03E19BDD1A4DF3AA0022643E"
-               BuildableName = "geomekeyboard.app"
-               BlueprintName = "geomekeyboard"
-               ReferencedContainer = "container:geomekeyboard.xcodeproj">
+               BuildableName = "Keyboard 468.app"
+               BlueprintName = "Keyboard 468"
+               ReferencedContainer = "container:Keyboard 468.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "03E19BF21A4DF3AA0022643E"
                BuildableName = "geomekeyboardTests.xctest"
                BlueprintName = "geomekeyboardTests"
-               ReferencedContainer = "container:geomekeyboard.xcodeproj">
+               ReferencedContainer = "container:Keyboard 468.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,7 +49,7 @@
                BlueprintIdentifier = "03E19BF21A4DF3AA0022643E"
                BuildableName = "geomekeyboardTests.xctest"
                BlueprintName = "geomekeyboardTests"
-               ReferencedContainer = "container:geomekeyboard.xcodeproj">
+               ReferencedContainer = "container:Keyboard 468.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03E19BDD1A4DF3AA0022643E"
-            BuildableName = "geomekeyboard.app"
-            BlueprintName = "geomekeyboard"
-            ReferencedContainer = "container:geomekeyboard.xcodeproj">
+            BuildableName = "Keyboard 468.app"
+            BlueprintName = "Keyboard 468"
+            ReferencedContainer = "container:Keyboard 468.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03E19BDD1A4DF3AA0022643E"
-            BuildableName = "geomekeyboard.app"
-            BlueprintName = "geomekeyboard"
-            ReferencedContainer = "container:geomekeyboard.xcodeproj">
+            BuildableName = "Keyboard 468.app"
+            BlueprintName = "Keyboard 468"
+            ReferencedContainer = "container:Keyboard 468.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -99,9 +99,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03E19BDD1A4DF3AA0022643E"
-            BuildableName = "geomekeyboard.app"
-            BlueprintName = "geomekeyboard"
-            ReferencedContainer = "container:geomekeyboard.xcodeproj">
+            BuildableName = "Keyboard 468.app"
+            BlueprintName = "Keyboard 468"
+            ReferencedContainer = "container:Keyboard 468.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

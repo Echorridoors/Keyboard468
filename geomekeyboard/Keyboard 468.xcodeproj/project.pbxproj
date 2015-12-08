@@ -46,7 +46,7 @@
 
 /* Begin PBXFileReference section */
 		030AC9A81A51A7CD003AAAA0 /* Geomekey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Geomekey.entitlements; sourceTree = "<group>"; };
-		03E19BDE1A4DF3AA0022643E /* geomekeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geomekeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03E19BDE1A4DF3AA0022643E /* Keyboard 468.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Keyboard 468.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E19BE21A4DF3AA0022643E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03E19BE31A4DF3AA0022643E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03E19BE51A4DF3AA0022643E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 		03E19BDF1A4DF3AA0022643E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				03E19BDE1A4DF3AA0022643E /* geomekeyboard.app */,
+				03E19BDE1A4DF3AA0022643E /* Keyboard 468.app */,
 				03E19C071A4DF45C0022643E /* Geomekey.appex */,
 			);
 			name = Products;
@@ -128,9 +128,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		03E19BDD1A4DF3AA0022643E /* geomekeyboard */ = {
+		03E19BDD1A4DF3AA0022643E /* Keyboard 468 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03E19BFD1A4DF3AA0022643E /* Build configuration list for PBXNativeTarget "geomekeyboard" */;
+			buildConfigurationList = 03E19BFD1A4DF3AA0022643E /* Build configuration list for PBXNativeTarget "Keyboard 468" */;
 			buildPhases = (
 				03E19BDA1A4DF3AA0022643E /* Sources */,
 				03E19BDB1A4DF3AA0022643E /* Frameworks */,
@@ -142,9 +142,9 @@
 			dependencies = (
 				03E19C0E1A4DF45C0022643E /* PBXTargetDependency */,
 			);
-			name = geomekeyboard;
+			name = "Keyboard 468";
 			productName = geomekeyboard;
-			productReference = 03E19BDE1A4DF3AA0022643E /* geomekeyboard.app */;
+			productReference = 03E19BDE1A4DF3AA0022643E /* Keyboard 468.app */;
 			productType = "com.apple.product-type.application";
 		};
 		03E19C061A4DF45C0022643E /* Geomekey */ = {
@@ -195,7 +195,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 03E19BD91A4DF3AA0022643E /* Build configuration list for PBXProject "geomekeyboard" */;
+			buildConfigurationList = 03E19BD91A4DF3AA0022643E /* Build configuration list for PBXProject "Keyboard 468" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -208,7 +208,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				03E19BDD1A4DF3AA0022643E /* geomekeyboard */,
+				03E19BDD1A4DF3AA0022643E /* Keyboard 468 */,
 				03E19C061A4DF45C0022643E /* Geomekey */,
 			);
 		};
@@ -379,7 +379,7 @@
 				INFOPLIST_FILE = geomekeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xxiivv.468;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Keyboard 468";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -399,7 +399,7 @@
 				INFOPLIST_FILE = geomekeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xxiivv.468;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Keyboard 468";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
@@ -442,7 +442,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		03E19BD91A4DF3AA0022643E /* Build configuration list for PBXProject "geomekeyboard" */ = {
+		03E19BD91A4DF3AA0022643E /* Build configuration list for PBXProject "Keyboard 468" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03E19BFB1A4DF3AA0022643E /* Debug */,
@@ -451,7 +451,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03E19BFD1A4DF3AA0022643E /* Build configuration list for PBXNativeTarget "geomekeyboard" */ = {
+		03E19BFD1A4DF3AA0022643E /* Build configuration list for PBXNativeTarget "Keyboard 468" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03E19BFE1A4DF3AA0022643E /* Debug */,

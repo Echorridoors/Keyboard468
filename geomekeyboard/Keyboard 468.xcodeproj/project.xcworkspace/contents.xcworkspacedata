@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:geomekeyboard.xcodeproj">
+      location = "self:/Users/VillaMoirai/Github/Keyboard468/geomekeyboard/Keyboard 468.xcodeproj">
    </FileRef>
 </Workspace>
